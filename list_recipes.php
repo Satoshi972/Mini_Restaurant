@@ -3,7 +3,7 @@
 require_once 'inc/connect.php';
 
 // On selectionne les colonnes id & title de la table recettes
-$select = $bdd->prepare('SELECT rcp_id,	rcp_title FROM recipe ORDER BY id DESC');
+$select = $bdd->prepare('SELECT rcp_id,	rcp_title, rce_content FROM recipe ORDER BY rcp_id DESC');
 if($select->execute()){
 	$restaurant = $select->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -25,7 +25,6 @@ else {
 	<table>
 		<thead>
 			<tr>
-				<th>Référence</th>
 				<th>Nom</th>
 				<th>Instructions</th>
 			</tr>
@@ -34,7 +33,6 @@ else {
 		<tbody>
 			<?php foreach($restaurant as $recipe): ?>
 				<tr>
-					<td><?=$recipe['rcp_id']; ?></td>
 					<td><?=$recipe['rcp_title']; ?></td>
 					<td>
 						<a href="view_recipe.php?id=<?=$recipe['rcp_id']; ?>">
