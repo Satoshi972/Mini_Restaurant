@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once 'inc/connect.php';
 
 
@@ -56,8 +57,6 @@ require_once 'inc/connect.php';
     </div>
   </div>
 </div>
-
-
 
 <!-- Text area -->
   
