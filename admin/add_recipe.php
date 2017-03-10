@@ -1,11 +1,11 @@
 <?php
 session_start(); // Permet de démarrer la session
-require_once 'inc/connect.php';
+require_once '../inc/connect.php';
 
-if(!isset($_SESSION['is_logged']) || $_SESSION['is_logged'] == false){
+/* if(!isset($_SESSION['is_logged']) || $_SESSION['is_logged'] == false){
  	header('Location: login.php');
  	die; 
-}
+}*/
 
 $maxSize = (1024 * 1000) * 2; // Taille maximum du fichier
 $uploadDir = 'uploads/'; // Répertoire d'upload
@@ -65,9 +65,11 @@ if(!empty($_POST)){
 
 	if(count($errors) === 0){
 
+		$request = $bdd->prepare('INSERT INTO recipe (rcp_title, rcp_content, rcp_picture) VALUES(:title, :content, :picture)');
 
 		$request->bindValue(':title', $post['title']);
 		$request->bindValue(':content', $post['content']);
+        $request->bindValue(':picture', $uploadDir.$newPictureName);
     
     if($request->execute()){
         $success = 'Youpi, la recette a bien été ajoutée';
@@ -119,21 +121,7 @@ if(!empty($_POST)){
 		<input type="file" name="picture" id="picture" accept="image/*">
 
 		<br>
-		<label for="note">Note</label>
-		<select name="note" id="note">
-			<option value="">-- Sélectionnez --</option>
-			<?php for($i=0;$i<=10;$i++): ?>
-				<option value="<?php echo $i;?>"><?php echo $i;?> / 10</option>
-			<?php endfor; ?>
-		</select>
-
-		<br>
-		<label for="selected">Sélection du chef ?</label>
-		<input type="checkbox" name="selected" id="selected"> Oui
-
-
-		<br>
-		<input type="submit" value="Envoyer ma recette">
+		<input type="submit" value="Envoyer la recette">
 	</form>
 	<?php endif; ?>
 
