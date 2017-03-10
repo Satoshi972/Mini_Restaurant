@@ -1,4 +1,28 @@
-<!DOCTYPE html>
+<?php 
+require_once '../inc/connect.php';
+
+$site_info = $bdd->prepare('SELECT * FROM site_info');
+if($site_info->execute())
+{
+	$info = $site_info->fetchAll(PDO::FETCH_ASSOC);
+}
+else
+{
+	die(var_dump($site_info->errorInfo()));
+}
+
+$list_recipe = $bdd->prepare('SELECT * FROM recipe, users WHERE rcp_usr_id = usr_id');
+if($list_recipe->execute())
+{
+	$recipe = $list_recipe->fetchAll(PDO::FETCH_ASSOC);
+}
+else
+{
+	die(var_dump($list_recipe->errorInfo()));
+}
+
+
+?><!DOCTYPE html>
 <html lang="fr">
 <head>
 	<meta charset="UTF-8">
