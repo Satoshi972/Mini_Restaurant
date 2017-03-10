@@ -22,9 +22,10 @@
 	?>
 	-->
 	<li>
-		<li><a href="admin/suscribe.php">Inscription</a></li>
-		<li><a href="admin/loggin.php">Connexion</a></li>
-		<li><a href="list_recipes.php">Liste de recette</a></li>
+		<li><a href="suscribe.php">Inscription</a></li>
+		<li><a href="loggin.php">Connexion</a></li>
+		<li><a href="../list_recipe.php">Liste de recette</a></li>
+		<li><a href="../index.php">Accueil</a></li>
 	</li>
 	</ul>
 </nav>

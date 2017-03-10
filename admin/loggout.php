@@ -21,7 +21,7 @@ if(isset($_GET['loggout']) && ($_GET['loggout'] == 'yes'))
 
 	<main class="container">
 		<?php 
-		include '../inc/menu.php';
+		include '../inc/menu_admin.php';
 		?>
 		<div class="jumbotron">
 			<?php 

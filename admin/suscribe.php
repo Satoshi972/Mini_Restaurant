@@ -85,7 +85,7 @@ if(!empty($_POST))
 <body>
 	<main class="container">
 		<?php 
-				include '../inc/menu.php';
+				include '../inc/menu_admin.php';
 				if(isset($formError) && $formError)
 				{ 
 					echo '<p class="error">'.implode('<br>', $error).'</p>';

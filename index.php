@@ -1,5 +1,5 @@
 <?php 
-require_once '../inc/connect.php';
+require_once 'inc/connect.php';
 
 $site_info = $bdd->prepare('SELECT * FROM site_info');
 if($site_info->execute())
