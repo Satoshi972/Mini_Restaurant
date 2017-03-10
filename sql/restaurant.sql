@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Ven 10 Mars 2017 à 16:21
+-- Généré le :  Ven 10 Mars 2017 à 21:07
 -- Version du serveur :  10.1.21-MariaDB
 -- Version de PHP :  7.1.1
 
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `restaurant`
 --
-CREATE DATABASE IF NOT EXISTS `restaurant` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `restaurant`;
 
 -- --------------------------------------------------------
 
@@ -46,9 +44,8 @@ CREATE TABLE `recipe` (
   `rcp_title` varchar(255) NOT NULL,
   `rcp_usr_id` int(11) NOT NULL,
   `rcp_content` text NOT NULL,
-  `rcp_picture` int(11) NOT NULL,
-  `rcp_note` int(11) NOT NULL,
-  `rcp_selected` int(11) NOT NULL
+  `rcp_picture` varchar(255) NOT NULL,
+  `rcp_note` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -62,6 +59,14 @@ CREATE TABLE `role` (
   `rol_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Contenu de la table `role`
+--
+
+INSERT INTO `role` (`rol_id`, `rol_name`) VALUES
+(1, 'admin'),
+(2, 'editor');
+
 -- --------------------------------------------------------
 
 --
@@ -72,7 +77,9 @@ CREATE TABLE `site_info` (
   `inf_id` int(11) NOT NULL,
   `inf_address` varchar(255) NOT NULL,
   `inf_picture` varchar(255) NOT NULL,
-  `inf_content` text NOT NULL
+  `inf_content` text NOT NULL,
+  `inf_name` varchar(255) NOT NULL,
+  `inf_number` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
@@ -90,6 +97,13 @@ CREATE TABLE `users` (
   `usr_subscribedate` datetime NOT NULL,
   `usr_rol_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `users`
+--
+
+INSERT INTO `users` (`usr_id`, `usr_lastname`, `usr_firstname`, `usr_email`, `usr_password`, `usr_subscribedate`, `usr_rol_id`) VALUES
+(5, 'MARIE-LUCE', 'Ruddy', 'kai972@live.fr', '$2y$10$T7jHI2Io2fWQI41wyxLADuxVQv/Ie57fPKY2vrQYsIPmWMp2eN5HG', '2017-03-10 14:28:51', 1);
 
 --
 -- Index pour les tables exportées
@@ -123,7 +137,8 @@ ALTER TABLE `site_info`
 -- Index pour la table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`usr_id`);
+  ADD PRIMARY KEY (`usr_id`),
+  ADD UNIQUE KEY `usr_email` (`usr_email`);
 
 --
 -- AUTO_INCREMENT pour les tables exportées
@@ -143,7 +158,7 @@ ALTER TABLE `recipe`
 -- AUTO_INCREMENT pour la table `role`
 --
 ALTER TABLE `role`
-  MODIFY `rol_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `rol_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `site_info`
 --
@@ -153,7 +168,7 @@ ALTER TABLE `site_info`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `usr_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `usr_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
