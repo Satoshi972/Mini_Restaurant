@@ -2,11 +2,6 @@
 session_start(); // Permet de démarrer la session
 require_once '../inc/connect.php';
 
-/* if(!isset($_SESSION['is_logged']) || $_SESSION['is_logged'] == false){
- 	header('Location: login.php');
- 	die; 
-}*/
-
 $maxSize = (1024 * 1000) * 2; // Taille maximum du fichier
 $uploadDir = 'uploads/'; // Répertoire d'upload
 $mimeTypeAvailable = ['image/jpg', 'image/jpeg', 'image/pjpeg', 'image/png', 'image/gif'];
@@ -15,34 +10,36 @@ $errors = [];
 $post = [];
 $displayForm = true;
 
+// si le post n'est pas vide, on récupère les données "nettoyées"
 if(!empty($_POST)){
 	foreach($_POST as $key => $value){
 		$post[$key] = trim(strip_tags($value));
 	}
-
+// si la valeur titre a moins de 5 ou plus de 50 caractères, alors "erreur"
 	if(strlen($post['title']) < 5 || strlen($post['title']) > 50){
 		$errors[] = 'Le titre doit contenir de 5 à 50 caractères';
 	}
-
+// si la valeur recette a moins de 20 caractères, alors "erreur"
 	if(strlen($post['content']) < 20){
-		$errors[] = 'La description doit contenir au moins 20 caractères';
+		$errors[] = 'La recette doit contenir au moins 20 caractères';
 	}
-
+// si le fichier image est défini et ne comporte pas d'erreur
 	if(isset($_FILES['picture']) && $_FILES['picture']['error'] === 0){
-
+        
 		$finfo = new finfo();
 		$mimeType = $finfo->file($_FILES['picture']['tmp_name'], FILEINFO_MIME_TYPE);
-
+        
+// vérifications de contrôle de l'image
 		$extension = pathinfo($_FILES['picture']['name'], PATHINFO_EXTENSION);
 
 		if(in_array($mimeType, $mimeTypeAvailable)){
-
+            // si le fichier n'excède pas le poids maxi autorisé
 			if($_FILES['image']['size'] <= $maxSize){
 
 				if(!is_dir($uploadDir)){
-					mkdir($uploadDir, 0755);
+					mkdir($uploadDir, 0755); //pour la compatibilité
 				}
-
+                // on renomme le fichier
 				$newPictureName = uniqid('image').'.'.$extension;
 
 				if(!move_uploaded_file($_FILES['image']['tmp_name'], $uploadDir.$newPictureName)){
@@ -61,18 +58,16 @@ if(!empty($_POST)){
 		$errors[] = 'Aucune image sélectionnée';
 	}
 
-
-
 	if(count($errors) === 0){
-
+        // s'il n'y a pas d'erreur, on récupère les données de la table "recipe", titre, contenu et image et on leur affecte un nom
 		$request = $bdd->prepare('INSERT INTO recipe (rcp_title, rcp_content, rcp_picture) VALUES(:title, :content, :picture)');
-
+        /* on affecte à chaque nom créé, la valeur récupérée dans les champs de la table de données et le chemin pour l'image... */
 		$request->bindValue(':title', $post['title']);
 		$request->bindValue(':content', $post['content']);
         $request->bindValue(':picture', $uploadDir.$newPictureName);
     
     if($request->execute()){
-        $success = 'Youpi, la recette a bien été ajoutée';
+        $success = 'Bravo, la recette a bien été ajoutée';
         $displayForm = false;
 		}
     else {
@@ -97,7 +92,7 @@ if(!empty($_POST)){
 <body>
 
 	<h1>Ajouter une recette</h1>
-
+    <!-- on affiche une message en cas d'erreur en rouge, sinon un message de succès en vert -->
 	<?php if(isset($errorsText)): ?>
 		<p style="color:red;"><?php echo $errorsText; ?></p>
 	<?php endif; ?>
@@ -109,11 +104,11 @@ if(!empty($_POST)){
 
 	<?php if($displayForm === true): ?>
 	<form method="post" enctype="multipart/form-data">
-		<label for="title">Titre de la recette</label>
+		<label for="title">Nom de la recette</label>
 		<input type="text" name="title" id="title">
 
 		<br>
-		<label for="content">Description</label>
+		<label for="content">Recette</label>
 		<textarea name="content" id="content"></textarea>
 
 		<br>
