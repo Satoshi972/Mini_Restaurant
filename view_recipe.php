@@ -1,18 +1,18 @@
 <?php
 require_once 'inc/connect.php';
 
-$recipe = [];
+$added_recipe = [];
 // view_menu.php?id=6
-if(isset($_GET['rcp_id']) && !empty($_GET['rcp_id'])){
+if(isset($_GET['id']) && !empty($_GET['id'])){
 
-	$idRecipe = (int) $_GET['rcp_id'];
+	$idRecipe = (int) $_GET['id'];
 
 	// Jointure SQL permettant de récupérer la recette & le prénom & nom de l'utilisateur l'ayant publié
-	$selectOne = $bdd->prepare('SELECT r.*, usr_firstname, usr_lastname FROM restaurant AS r INNER JOIN users AS u ON r.usr_id = usr_id WHERE r.id = :rcp_id');
-	$selectOne->bindValue(':rcp_id', $rcp_id, PDO::PARAM_INT);
+	$selectOne = $bdd->prepare('SELECT usr_firstname, usr_lastname FROM users INNER JOIN recipe ON usr_id = rcp_usr_id WHERE rcp_id = :id');
+	$selectOne->bindValue(':id', $idRecipe, PDO::PARAM_INT);
 
 	if($selectOne->execute()){
-		$recette = $selectOne->fetch(PDO::FETCH_ASSOC);
+		$added_recipe = $selectOne->fetch(PDO::FETCH_ASSOC);
 	}
 	else {
 		// Erreur de développement
@@ -29,19 +29,18 @@ if(isset($_GET['rcp_id']) && !empty($_GET['rcp_id'])){
 	<title>Détails de la recette</title>
 </head>
 <body>
-<?php if(!empty($recipe)): ?>
 	<h1>Détails de la recette</h1>
+   
+    <?php if(!empty($added_recipe)): ?>
+	<h2><?php echo $added_recipe['rcp_title'];?></h2>
 
-	<h2><?php echo $recipe['rcp_title'];?></h2>
-
-	<p><?php echo nl2br($recipe['rcp_content']); ?></p>
-
-	<img src="<?=$recipe['picture'];?>" alt="<?php echo $recette['title'];?>">
+	<p><?php echo nl2br($added_recipe['rcp_content']); ?></p>
+    <!-- on affiche l'image récupérée dans notre tableau added_recipe avec les données récupérées dans la table, à défaut on affiche le nom de la rectte récupérée dans la table -->
+	<img src="<?=$added_recipe['rcp_picture'];?>" alt="<?php echo added_recipe['rcp_title'];?>">
 
 
-	<p>Publié par <?php echo $recipe['firstname'].' '.$recette['lastname'];?></p>
+	<p>Publié par <?php echo $added_recipe['usr_firstname'].' '.$added_recipe['usr_lastname'];?></p>
 <?php else: ?>
-
 	Aucune recette trouvée !
 <?php endif; ?>
 
