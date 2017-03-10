@@ -8,129 +8,134 @@ $errors = [];
 
 
 if(!empty($_POST)) { // si le tableau n'est pas vide alors on fait une boucle qui verifie les valeurs de chaque input, récupere pour chaque clé sa valeur et regarde si il n'y a pas d'espaces avant et apres
-foreach($_POST as $key => $value){ //
-        $user[$key] = trim(strip_tags($value));// sert a retirer les balises html ou php.  
-        }
+	foreach($_POST as $key => $value){ //
+		$user[$key] = trim(strip_tags($value));// sert a retirer les balises html ou php.  
+	}
 	if(empty($user["last_name"]) && strlen($user["last_name"]) < 2 ) {
-    $errors[] = "<p>Votre nom doit être complété</p><br>";
-}
+		$errors[] = "<p>Votre nom doit être complété</p><br>";
+	}
 
-  if(empty($user["first_name"]) && strlen($user["first_name"]) < 2) {
-    $errors[] = "<p>Votre prénom doit être complété</p><br>";
-}
+	if(empty($user["first_name"]) && strlen($user["first_name"]) < 2) {
+		$errors[] = "<p>Votre prénom doit être complété</p><br>";
+	}
 	if(!filter_var($user["email"], FILTER_VALIDATE_EMAIL) ) {
-         $errors[] = "<p>Votre EMAIL est invalide !!!</p><br>";         
-}
+		$errors[] = "<p>Votre EMAIL est invalide !!!</p><br>";         
+	}
 	if(empty($user["comment"]) && strlen($user["comment"]) < 2) {
-    $errors[] = "<p>Votre description doit être complétée</p><br>";
-}
-	
+		$errors[] = "<p>Votre message doit être complété</p><br>";
+	}
+
 	if(count($errors) === 0) {
-       
-    $req = $bdd->prepare("INSERT INTO contacts (cts_content,cts_date) VALUES(:cts_content, now() )");
-    
-    $req->bindValue(":cts_content", json_encode($user));
-    
-    
-    if($req->execute()) {
-      $success = 'Youpi, vous avez été ajouté avec succès';
-			
-    }
-    else {
+
+		$req = $bdd->prepare("INSERT INTO contacts (cts_content,cts_date) VALUES(:cts_content, now() )");
+
+		$req->bindValue(":cts_content", json_encode($user));
+
+
+		if($req->execute()) {
+			$success = 'Merci, votre message est parti avec succès.';
+
+		}
+		else {
 			// Erreur de développement
 			var_dump($req->errorInfo());
 			die; // alias de exit(); => die('Hello world');
 		}
-  
-  } else {
-  	echo "vous avez une erreur";
-  }
+
+	} else {
+		$textErrors = implode('<br>', $errors);
+	}
 
 }
 
-
-
 ?><!DOCTYPE html>
 <html lang="fr">
-<head>
-<?php include_once 'inc/head.php'; ?>
-	<meta charset="UTF-8">
-	<title>Contact</title>
-</head>
-<body>
+	<head>
+		<?php include_once 'inc/head.php'; ?>
+		<meta charset="UTF-8">
+		<title>Contact</title>
+	</head>
+	<body>
 
-<?php include_once 'inc/menu.php'; ?>
-	
-  <div class="container">
+		<?php include_once 'inc/menu.php'; ?>
 
-    <form class="well form-horizontal" method="post" id="contact_form">
-<fieldset>
+		<div class="container">
+			<?php
+			if(isset($textErrors)){
+				echo '<p style="color:red" class="text-danger">'.$textErrors.'</p>';
+			}
+			if(isset($success)){
+				echo '<p>'.$success.'</p>';
+			}
+			?>
+			<form class="well form-horizontal" method="post" id="contact_form">
+				<fieldset>
 
-<!-- Form Name -->
-<legend>Contactez-nous!</legend>
+					<!-- Form Name -->
+					<legend>Contactez-nous!</legend>
 
-<!-- last_name-->
+					<!-- last_name-->
 
-<div class="form-group">
-  <label class="col-md-4 control-label" >Nom</label> 
-    <div class="col-md-4 inputGroupContainer">
-    <div class="input-group">
-  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input name="last_name" placeholder="Nom" class="form-control"  type="text">
-    </div>
-  </div>
-</div>
+					<div class="form-group">
+						<label class="col-md-4 control-label" >Nom</label> 
+						<div class="col-md-4 inputGroupContainer">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+								<input name="last_name" placeholder="Nom" class="form-control"  type="text">
+							</div>
+						</div>
+					</div>
 
-<!-- first_name-->
+					<!-- first_name-->
 
-<div class="form-group">
-  <label class="col-md-4 control-label">Prénom</label>  
-  <div class="col-md-4 inputGroupContainer">
-  <div class="input-group">
-  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input  name="first_name" placeholder="Prénom" class="form-control"  type="text">
-    </div>
-  </div>
-</div>
+					<div class="form-group">
+						<label class="col-md-4 control-label">Prénom</label>  
+						<div class="col-md-4 inputGroupContainer">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+								<input  name="first_name" placeholder="Prénom" class="form-control"  type="text">
+							</div>
+						</div>
+					</div>
 
-<!-- email-->
-       
-<div class="form-group">
-  <label class="col-md-4 control-label">E-Mail</label>  
-    <div class="col-md-4 inputGroupContainer">
-    <div class="input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-  <input name="email" placeholder="E-Mail Address" class="form-control"  type="text">
-    </div>
-  </div>
-</div>
+					<!-- email-->
 
-<!-- Text area -->
-  
-<div class="form-group">
-  <label class="col-md-4 control-label">Message</label>
-    <div class="col-md-4 inputGroupContainer">
-    <div class="input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-        	<textarea class="form-control"  rows="8" name="comment" placeholder="Votre message"></textarea>
-  </div>
-  </div>
-</div>
+					<div class="form-group">
+						<label class="col-md-4 control-label">E-Mail</label>  
+						<div class="col-md-4 inputGroupContainer">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+								<input name="email" placeholder="E-Mail Address" class="form-control"  type="text">
+							</div>
+						</div>
+					</div>
 
-<!-- Success message -->
-<div class="alert alert-success" style="display: none" role="alert" id="success_message">Success <i class="glyphicon glyphicon-thumbs-up"></i> Merci de vous contacter, nous vous repondrons au plus vite !!!</div>
+					<!-- Text area -->
 
-<!-- Button -->
-<div class="form-group">
-  <label class="col-md-4 control-label"></label>
-  <div class="col-md-4">
-    <button type="submit" class="btn btn-warning" >Envoyer <span class="glyphicon glyphicon-send"></span></button>
-  </div>
-</div>
+					<div class="form-group">
+						<label class="col-md-4 control-label">Message</label>
+						<div class="col-md-4 inputGroupContainer">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+								<textarea class="form-control"  rows="8" name="comment" placeholder="Votre message"></textarea>
+							</div>
+						</div>
+					</div>
 
-</fieldset>
-</form>
-</div><!-- /.container -->
-<?php include_once 'inc/script.php'; ?>
-</body>
+					<!-- Success message -->
+					<div class="alert alert-success" style="display: none" role="alert" id="success_message">Success <i class="glyphicon glyphicon-thumbs-up"></i> Merci de vous contacter, nous vous repondrons au plus vite !!!</div>
+
+					<!-- Button -->
+					<div class="form-group">
+						<label class="col-md-4 control-label"></label>
+						<div class="col-md-4">
+							<button type="submit" class="btn btn-warning" >Envoyer <span class="glyphicon glyphicon-send"></span></button>
+						</div>
+					</div>
+
+				</fieldset>
+			</form>
+		</div><!-- /.container -->
+		<?php include_once 'inc/script.php'; ?>
+	</body>
 </html>
