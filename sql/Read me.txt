@@ -1,0 +1,2 @@
+le fichier role contient les roles des utilisateur disponible (c'est deja rentré).
+le fichier contact.sql contient une ligne d'enregistrement du formulaire contact.
