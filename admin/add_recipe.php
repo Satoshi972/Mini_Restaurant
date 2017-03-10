@@ -65,14 +65,12 @@ if(!empty($_POST)){
 
 	if(count($errors) === 0){
 
-		$request = $bdd->prepare('INSERT INTO recipe (rcp_title, rcp_content, picture) VALUES(:rcp_title, :rcp_content, :picture)');
 
 		$request->bindValue(':title', $post['title']);
 		$request->bindValue(':content', $post['content']);
-        $request->bindValue(':image', $post['image']);
     
     if($request->execute()){
-        $success = 'Youpi, la recette est ajoutée avec succès';
+        $success = 'Youpi, la recette a bien été ajoutée';
         $displayForm = false;
 		}
     else {
@@ -110,11 +108,11 @@ if(!empty($_POST)){
 	<?php if($displayForm === true): ?>
 	<form method="post" enctype="multipart/form-data">
 		<label for="title">Titre de la recette</label>
-		<input type="text" name="rcp_title" id="title">
+		<input type="text" name="title" id="title">
 
 		<br>
 		<label for="content">Description</label>
-		<textarea name="rcp_content" id="content"></textarea>
+		<textarea name="content" id="content"></textarea>
 
 		<br>
 		<label for="picture">Photo</label>

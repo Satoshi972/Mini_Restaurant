@@ -41,7 +41,6 @@ if(isset($_GET['rcp_id']) && !empty($_GET['rcp_id'])){
 
 	<p>Publié par <?php echo $recipe['firstname'].' '.$recette['lastname'];?></p>
 <?php else: ?>
-
 	Aucune recette trouvée !
 <?php endif; ?>
 
