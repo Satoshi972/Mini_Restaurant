@@ -3,7 +3,7 @@
 require_once 'inc/connect.php';
 
 // On selectionne les colonnes id & title de la table recettes
-$select = $bdd->prepare('SELECT rcp_id,	rcp_title, rce_content FROM recipe ORDER BY rcp_id DESC');
+$select = $bdd->prepare('SELECT rcp_id,	rcp_title FROM recipe ORDER BY rcp_id DESC');
 if($select->execute()){
 	$restaurant = $select->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -26,7 +26,7 @@ else {
 		<thead>
 			<tr>
 				<th>Nom</th>
-				<th>Instructions</th>
+				<th>Recette</th>
 			</tr>
 		</thead>
 
