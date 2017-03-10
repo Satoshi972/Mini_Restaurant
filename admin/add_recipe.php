@@ -34,7 +34,7 @@ if(!empty($_POST)){
 
 		if(in_array($mimeType, $mimeTypeAvailable)){
             // si le fichier n'excède pas le poids maxi autorisé
-			if($_FILES['image']['size'] <= $maxSize){
+			if($_FILES['picture']['size'] <= $maxSize){
 
 				if(!is_dir($uploadDir)){
 					mkdir($uploadDir, 0755); //pour la compatibilité
@@ -42,7 +42,7 @@ if(!empty($_POST)){
                 // on renomme le fichier
 				$newPictureName = uniqid('image').'.'.$extension;
 
-				if(!move_uploaded_file($_FILES['image']['tmp_name'], $uploadDir.$newPictureName)){
+				if(!move_uploaded_file($_FILES['picture']['tmp_name'], $uploadDir.$newPictureName)){
 					$errors[] = 'Erreur lors de l\'upload du fichier';
 				}
 			}
