@@ -86,12 +86,16 @@ if(!empty($_POST)){
 <html>
 <head>
 <meta charset="utf-8">
+	<?php include '../inc/head.php';?>
 <title>Ajouter une recette</title>
 
 </head>
 <body>
-
-	<h1>Ajouter une recette</h1>
+   	<main class="container">
+	<?php include '../inc/menu_admin.php'; ?>
+   
+    <div class="jumbotron">
+	<h3>Ajouter une recette</h3>
     <!-- on affiche une message en cas d'erreur en rouge, sinon un message de succès en vert -->
 	<?php if(isset($errorsText)): ?>
 		<p style="color:red;"><?php echo $errorsText; ?></p>
@@ -104,22 +108,28 @@ if(!empty($_POST)){
 
 	<?php if($displayForm === true): ?>
 	<form method="post" enctype="multipart/form-data">
+	    <div class="form-group">
 		<label for="title">Nom de la recette</label>
-		<input type="text" name="title" id="title">
-
-		<br>
+		<input class="form-control" type="text" name="title" id="title">
+        </div>
+        
+        <div class="form-group">
 		<label for="content">Recette</label>
-		<textarea name="content" id="content"></textarea>
-
-		<br>
+		<textarea class="form-control" name="content" id="content"></textarea>
+        </div>
+		
+		<div class="form-group">
 		<label for="picture">Photo</label>
-		<input type="file" name="picture" id="picture" accept="image/*">
-
-		<br>
-		<input type="submit" value="Envoyer la recette">
+		<input class="form control" type="file" name="picture" id="picture" accept="image/*">
+        </div>
+        
+        <div class="text-center">
+		<input class="btn btn-primary" type="submit" value="Envoyer la recette">
+        </div>
 	</form>
 	<?php endif; ?>
+    </div>
 
-
+    <?php include '../inc/script.php' ?>
 </body>
 </html>
