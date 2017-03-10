@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Ven 10 Mars 2017 à 15:45
+-- Généré le :  Ven 10 Mars 2017 à 16:21
 -- Version du serveur :  10.1.21-MariaDB
 -- Version de PHP :  7.1.1
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `restaurant`
 --
+CREATE DATABASE IF NOT EXISTS `restaurant` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `restaurant`;
 
 -- --------------------------------------------------------
 
@@ -31,19 +33,6 @@ CREATE TABLE `contacts` (
   `cts_content` text NOT NULL,
   `cts_date` datetime NOT NULL,
   `cts_statuts` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `contact_info`
---
-
-CREATE TABLE `contact_info` (
-  `inf_id` int(11) NOT NULL,
-  `inf_address` varchar(255) NOT NULL,
-  `inf_picture` varchar(255) NOT NULL,
-  `inf_content` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -76,6 +65,19 @@ CREATE TABLE `role` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `site_info`
+--
+
+CREATE TABLE `site_info` (
+  `inf_id` int(11) NOT NULL,
+  `inf_address` varchar(255) NOT NULL,
+  `inf_picture` varchar(255) NOT NULL,
+  `inf_content` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `users`
 --
 
@@ -100,12 +102,6 @@ ALTER TABLE `contacts`
   ADD PRIMARY KEY (`cts_id`);
 
 --
--- Index pour la table `contact_info`
---
-ALTER TABLE `contact_info`
-  ADD PRIMARY KEY (`inf_id`);
-
---
 -- Index pour la table `recipe`
 --
 ALTER TABLE `recipe`
@@ -116,6 +112,12 @@ ALTER TABLE `recipe`
 --
 ALTER TABLE `role`
   ADD PRIMARY KEY (`rol_id`);
+
+--
+-- Index pour la table `site_info`
+--
+ALTER TABLE `site_info`
+  ADD PRIMARY KEY (`inf_id`);
 
 --
 -- Index pour la table `users`
@@ -133,11 +135,6 @@ ALTER TABLE `users`
 ALTER TABLE `contacts`
   MODIFY `cts_id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `contact_info`
---
-ALTER TABLE `contact_info`
-  MODIFY `inf_id` int(11) NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT pour la table `recipe`
 --
 ALTER TABLE `recipe`
@@ -147,6 +144,11 @@ ALTER TABLE `recipe`
 --
 ALTER TABLE `role`
   MODIFY `rol_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `site_info`
+--
+ALTER TABLE `site_info`
+  MODIFY `inf_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `users`
 --
