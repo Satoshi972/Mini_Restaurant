@@ -106,6 +106,7 @@ if(!empty($_POST))
 				<div class="form-group">
 					<label for="passwd">Mot de passe</label>
 					<input class="form-control" type="password" id="passwd" name="passwd" placeholder="Votre mot de passe">
+					<a href="psw_recorver.php">Mot de passe oublié ?</a>
 				</div>
 				
 
