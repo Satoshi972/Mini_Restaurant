@@ -11,17 +11,17 @@ if(!empty($_POST)) { // si le tableau n'est pas vide alors on fait une boucle qu
 	foreach($_POST as $key => $value){ //
 		$user[$key] = trim(strip_tags($value));// sert a retirer les balises html ou php.  
 	}
-	if(empty($user["last_name"]) && strlen($user["last_name"]) < 2 ) {
+	if(empty($user["last_name"]) || strlen($user["last_name"]) < 3) {
 		$errors[] = "<p>Votre nom doit être complété</p><br>";
 	}
 
-	if(empty($user["first_name"]) && strlen($user["first_name"]) < 2) {
+	if(empty($user["first_name"]) || strlen($user["first_name"]) < 3) {
 		$errors[] = "<p>Votre prénom doit être complété</p><br>";
 	}
-	if(!filter_var($user["email"], FILTER_VALIDATE_EMAIL) ) {
+	if(!filter_var($user["email"], FILTER_VALIDATE_EMAIL)) {
 		$errors[] = "<p>Votre EMAIL est invalide !!!</p><br>";         
 	}
-	if(empty($user["comment"]) && strlen($user["comment"]) < 2) {
+	if(empty($user["comment"]) || strlen($user["comment"]) < 2) {
 		$errors[] = "<p>Votre message doit être complété</p><br>";
 	}
 
@@ -35,8 +35,7 @@ if(!empty($_POST)) { // si le tableau n'est pas vide alors on fait une boucle qu
 		if($req->execute()) {
 			$success = 'Merci, votre message est parti avec succès.';
 
-		}
-		else {
+		} else {
 			// Erreur de développement
 			var_dump($req->errorInfo());
 			die; // alias de exit(); => die('Hello world');
@@ -56,29 +55,32 @@ if(!empty($_POST)) { // si le tableau n'est pas vide alors on fait une boucle qu
 		<title>Contact</title>
 	</head>
 	<body>
+		<main class="page">
 
 		<?php include_once 'inc/menu.php'; ?>
 
-		<div class="container">
+		<div id="content" class="container">
 			<?php
-			if(isset($textErrors)){
-				echo '<p style="color:red" class="text-danger">'.$textErrors.'</p>';
-			}
-			if(isset($success)){
-				echo '<p>'.$success.'</p>';
-			}
+			if(isset($textErrors)){ ?>
+				<div class="alert alert-danger" role="alert">
+				<?php echo '<p>'.$textErrors.'</p>'; ?>
+			</div>
+			<?php }
+			if(isset($success)){ ?>
+				<div class="alert alert-success" role="alert">
+				<?php echo '<p>'.$success.'</p>'; ?>
+			</div>
+			<?php }
 			?>
 			<form class="well form-horizontal" method="post" id="contact_form">
 				<fieldset>
-
 					<!-- Form Name -->
-					<legend>Contactez-nous!</legend>
+					<legend class="nameForm">Contactez-nous!</legend>
 
 					<!-- last_name-->
-
 					<div class="form-group">
-						<label class="col-md-4 control-label" >Nom</label> 
-						<div class="col-md-4 inputGroupContainer">
+						<label class="col-md-3 control-label" >Nom</label> 
+						<div class="col-md-6 inputGroupContainer">
 							<div class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
 								<input name="last_name" placeholder="Nom" class="form-control"  type="text">
@@ -89,8 +91,8 @@ if(!empty($_POST)) { // si le tableau n'est pas vide alors on fait une boucle qu
 					<!-- first_name-->
 
 					<div class="form-group">
-						<label class="col-md-4 control-label">Prénom</label>  
-						<div class="col-md-4 inputGroupContainer">
+						<label class="col-md-3 control-label">Prénom</label>  
+						<div class="col-md-6 inputGroupContainer">
 							<div class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
 								<input  name="first_name" placeholder="Prénom" class="form-control"  type="text">
@@ -101,8 +103,8 @@ if(!empty($_POST)) { // si le tableau n'est pas vide alors on fait une boucle qu
 					<!-- email-->
 
 					<div class="form-group">
-						<label class="col-md-4 control-label">E-Mail</label>  
-						<div class="col-md-4 inputGroupContainer">
+						<label class="col-md-3 control-label">E-Mail</label>  
+						<div class="col-md-6 inputGroupContainer">
 							<div class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
 								<input name="email" placeholder="E-Mail Address" class="form-control"  type="text">
@@ -113,11 +115,11 @@ if(!empty($_POST)) { // si le tableau n'est pas vide alors on fait une boucle qu
 					<!-- Text area -->
 
 					<div class="form-group">
-						<label class="col-md-4 control-label">Message</label>
-						<div class="col-md-4 inputGroupContainer">
+						<label class="col-md-3 control-label">Message</label>
+						<div class="col-md-6 inputGroupContainer">
 							<div class="input-group">
 								<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-								<textarea class="form-control"  rows="8" name="comment" placeholder="Votre message"></textarea>
+								<textarea class="form-control"  rows="5" name="comment" placeholder="Votre message"></textarea>
 							</div>
 						</div>
 					</div>
@@ -136,6 +138,7 @@ if(!empty($_POST)) { // si le tableau n'est pas vide alors on fait une boucle qu
 				</fieldset>
 			</form>
 		</div><!-- /.container -->
+		<
 		<?php include_once 'inc/script.php'; ?>
 	</body>
 </html>
