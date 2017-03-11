@@ -35,6 +35,7 @@ if(!empty($_POST))
 					
 					#  https://www.w3schools.com/php/func_mail_mail.asp
 					# Envoi du mail contenant le token a l'utilisateur, token qui servira de verification
+					mail($post,'Réinitialisation de mot de passe',"<a href='localhost/Mini_Restaurant/psw_recorver_update?token=<?php=$token['psw_token']?>'>Votre lien de récupération</a>");
 				}
 				else
 				{
