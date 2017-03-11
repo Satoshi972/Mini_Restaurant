@@ -20,7 +20,7 @@ if(!empty($_POST))
 			die(var_dump($info));
 
 			$insert= $bdd->prepare('INSERT INTO reset_password (psw_token, psw_usr_id) VALUES (:token, :userId) ');
-			$insert->bindValue(':token',md5($post['usr_email']))
+			$insert->bindValue(':token',md5($post['usr_email']));
 			$insert->bindValue(':userId',$info['usr_id']);
 
 			if($insert->execute())
@@ -35,7 +35,6 @@ if(!empty($_POST))
 					
 					#  https://www.w3schools.com/php/func_mail_mail.asp
 					# Envoi du mail contenant le token a l'utilisateur, token qui servira de verification
-					mail($post['email'],"Réinitialisation de mot de passe", "Lien de récupération : <a href='localhost/Mini_Restaurant/psw_recorver_update?token=<?php echo $token['psw_token']?>'");
 				}
 				else
 				{

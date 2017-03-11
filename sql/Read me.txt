@@ -1,2 +1,4 @@
 le fichier role contient les roles des utilisateur disponible (c'est deja rentré).
 le fichier contact.sql contient une ligne d'enregistrement du formulaire contact.
+
+reset_password est une table qui permet de gerer les mdp perdu via un token. Au moment de la contraction de la demande du mdp, si l'utilisateur existe, un token est créer (en md5), envoyer dans la table en fonction de de l'id utilisateur (récuperer en meme temps que la recherche du mail). Apres, un mail est envoyer avec lien allant sur la page avec le token en paramettre (token envoyer sur la base). Si le token est reconnu, on permet a l'utilisaeur de modifier son mdp.
