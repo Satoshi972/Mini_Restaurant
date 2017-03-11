@@ -38,13 +38,13 @@ if(!empty($_POST)){
 
 				if(!is_dir($uploadDir)){
 					mkdir($uploadDir, 0755); //pour la compatibilité
-				}
+				} 
                 // on renomme le fichier
-				$newPictureName = uniqid('image').'.'.$extension;
+				$newPictureName = uniqid('image_').'.'.$extension;
 
 				if(!move_uploaded_file($_FILES['picture']['tmp_name'], $uploadDir.$newPictureName)){
 					$errors[] = 'Erreur lors de l\'upload du fichier';
-				}
+				} 
 			}
 			else {
 				$errors[] = 'La taille du fichier excède 2 Mo';
@@ -64,7 +64,7 @@ if(!empty($_POST)){
         /* on affecte à chaque nom créé, la valeur récupérée dans les champs de la table de données et le chemin pour l'image... */
 		$request->bindValue(':title', $post['title']);
 		$request->bindValue(':content', $post['content']);
-        $request->bindValue(':picture', $uploadDir.$newPictureName);
+    $request->bindValue(':picture', $uploadDir.$newPictureName);
     
     if($request->execute()){
         $success = 'Bravo, la recette a bien été ajoutée';
@@ -115,7 +115,7 @@ if(!empty($_POST)){
         
         <div class="form-group">
 		<label for="content">Recette</label>
-		<textarea class="form-control" name="content" id="content"></textarea>
+		<textarea class="form-control" rows="6" name="content" id="content"></textarea>
         </div>
 		
 		<div class="form-group">
