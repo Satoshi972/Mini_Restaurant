@@ -25,21 +25,23 @@ if(!empty($_POST))
 				$nbretour = count($info);
 
 				if($nbretour == 2){
+					
+					$token = md5($info['usr_email']);
 
 					$insert= $bdd->prepare('INSERT INTO reset_password (psw_token, psw_usr_id) VALUES (:token, :userId) ');
-					$insert->bindValue(':token',md5($info['usr_email']));
+					$insert->bindValue(':token', $token);
 					$insert->bindValue(':userId',$info['usr_id']);
 
-					if($insert->execute())
-					{
-							$token = $insert->fetch(PDO::FETCH_ASSOC);
-							
-							#  https://www.w3schools.com/php/func_mail_mail.asp
-							# Envoi du mail contenant le token a l'utilisateur, token qui servira de verification
-							
-							$link = $_SERVER['SERVER_NAME'].'Mini_Restaurant/admin/';
+					if($insert->execute()){
 
-							mail($post,'Réinitialisation de mot de passe','<a href="'.$link.'psw_recorver_update?token='.$token['psw_token'].'">Votre lien de récupération</a>');
+
+							$headers = 'From: webmaster@example.com' . "\r\n" .
+									    'Reply-To: webmaster@example.com' . "\r\n" .
+									    'X-Mailer: PHP/' . phpversion();
+
+							$data = "<a href='psw_recorver_update?token=".$token."'>Votre lien de récupération</a>";							
+
+							mail($post['email'],'Réinitialisation de mot de passe', $data, $headers);
 
 							
 					}else
