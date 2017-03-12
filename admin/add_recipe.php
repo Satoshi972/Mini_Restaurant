@@ -1,5 +1,8 @@
 <?php
 session_start(); // Permet de démarrer la session
+
+require_once './inc/verif_session.php';
+
 require_once '../inc/connect.php';
 
 
@@ -86,14 +89,19 @@ if(!empty($_POST)){
 ?><!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-	<?php include_once '../inc/head.php';?>
-<title>Ajouter une recette</title>
+	<meta charset="utf-8">
+	<title>Ajouter une recette</title>
+	
+	<?php include '../inc/head.php'; ?>
+
+	<link rel="stylesheet" type="text/css" href="assets/css/styleAdmin.css">
 
 </head>
 <body>
+
+	<?php include './inc/menu_admin.php'; ?>
+
    	<main class="container">
-	<?php include_once '../inc/menu.php'; ?>
    
     <div class="jumbotron">
 	<h3>Ajouter une recette</h3>

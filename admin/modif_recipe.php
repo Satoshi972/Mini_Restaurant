@@ -1,5 +1,7 @@
 <?php
 session_start();
+
+require_once 'inc/verif_session.php';
 require_once '../inc/connect.php';
 
 $maxSize = (1024 * 1000) * 2; // Taille maximum du fichier
@@ -102,14 +104,19 @@ if(!empty($_POST)){
 <html>
 	<head>
 		<meta charset="utf-8">
-		<link rel="stylesheet" href="../assets/css/style.css">		
-		<?php include_once '../inc/head.php'; ?>
 		<title>Modifier une recette</title>
+
+		<?php include '../inc/head.php'; ?>
+
+		<link rel="stylesheet" type="text/css" href="assets/css/styleAdmin.css">
+
+		<link rel="stylesheet" href="../assets/css/style.css">		
 
 	</head>
 	<body>
+		<?php include './inc/menu_admin.php'; ?>
 		<main class="page">
-			<!-- <?php include_once '.inc/menu.php'; ?> -->
+			
 
 			<div id="content" class="well container">
 				<section class="row">

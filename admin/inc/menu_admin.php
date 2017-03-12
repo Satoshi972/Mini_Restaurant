@@ -1,49 +1,63 @@
-<?php
-session_start();
-
-if(isset($_SESSION['is_logged'])){
-	$nomUser = $_SESSION['nom'];
-	$prenomUser = $_SESSION['prenom'];
-	$roleUser = $_SESSION['role'];
-}else{
-	header('location: ./../loggin.php');
-}
-?><!DOCTYPE html>
-<html lang="fr">
-<head>
-	<meta charset="UTF-8">
-	<title>Menu admin</title>
-	
-	<?php include_once '../../inc/head.php'; ?>
-
-	<link rel="stylesheet" type="text/css" href="../assets/css/styleAdmin.css">
-
-</head>
-<body>
-
-	<nav class="sidebar">
-		<div class="brand">
-			<?php if($roleUser == 'admin'): ?>
-				ADMINISTRATEUR
-			<?php elseif ($roleUser == 'editor'): ?>
-				EDITEUR
-			<?php endif; ?>
+	<div class="container-fluid">
+		<div class="topinfo">
+				<?php if($roleUser == 'admin'): ?>
+						<h4>ADMINISTRATEUR</h4>
+					<?php elseif ($roleUser == 'editor'): ?>
+						<h4>EDITEUR</h4>
+					<?php endif; ?>
+			<div class="container">
+					<div class="inforight">
+						<h5>Bonjour <?=$nomUser.' '.$prenomUser?> / </h5>
+						<a href="./loggout.php">Vous Deconnecter</a>
+					</div>
+			</div>
 		</div>
-			<div class="navside">
-				<ul>
-					<li><a href="#">menu 1</a></li>
-					<li><a href="#">menu 2</a></li>
-					<li><a href="#">menu 3</a></li>
-					<li><a href="#">menu 4</a></li>
-				</ul>	
-			</div>	
+	</div>
+	<nav class="sidebar">
+			<?php if($roleUser == 'admin'): ?>
+				<div class="navside">
+					<ul>
+						<div class="titreMenu">Gestion du Site</div>
+						<li><a href="#">Coordonnées</a></li>
+						<li><a href="#">Photo de couverture</a></li>
+					</ul>	
+				</div>
+				<div class="navside">
+					<ul>
+						<div class="titreMenu">Gestion des recettes</div>
+						<li><a href="#">Liste des recettes</a></li>
+						<li><a href="#">Modifer une recette</a></li>
+						<li><a href="#">Supprimer une recette</a></li>
+						<li><a href="#">Ajouter une recette</a></li>
+					</ul>	
+				</div>
+				<div class="navside">
+					<ul>
+						<div class="titreMenu">Gestion des Contacts</div>
+						<li><a href="#">menu 1</a></li>
+						<li><a href="#">menu 2</a></li>
+
+					</ul>	
+				</div>
+				<div class="navside">
+					<ul>
+						<div class="titreMenu">Gestion des Utilisateurs</div>
+						<li><a href="#">Creer un Utilisateur</a></li>
+						<li><a href="#">menu 2</a></li>
+
+					</ul>	
+				</div>
+			<?php endif; ?>
+			<?php if($roleUser == 'editor'): ?>
+				<div class="navside">
+					<ul>
+						<div class="titreMenu">Gestion des recettes</div>
+						<li><a href="#">Liste des recettes</a></li>
+						<li><a href="#">Modifer une recette</a></li>
+						<li><a href="#">Supprimer une recette</a></li>
+						<li><a href="#">Ajouter une recette</a></li>
+					</ul>	
+				</div>
+			<?php endif; ?>
 	</nav>
 	<div class="content">
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-	</div>
-
-	
-</body>
-</html>

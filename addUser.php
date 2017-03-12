@@ -9,47 +9,45 @@ $errors = [];
 
 if(!empty($_POST)) { // si le tableau n'est pas vide alors on fait une boucle qui verifie les valeurs de chaque input, récupere pour chaque clé sa valeur et regarde si il n'y a pas d'espaces avant et apres
         foreach($_POST as $key => $value){ //
-            $user[$key] = trim(strip_tags($value));// sert a retirer les balises html ou php.
-            
+            $user[$key] = trim(strip_tags($value));// sert a retirer les balises html ou php.  
         }
 //- on fait les verifications d'usage
 
     if(empty($user["nom"])) {
     $errors[] = "<p>Votre nom doit être complété</p><br>";
-}
+	}
 
     if(empty($user["prenom"])) {
     $errors[] = "<p>Votre prénom doit être complété</p><br>";
-}
+	}
 
     if(empty($user["password"])) {
     $errors[] = "<p>Votre mot de passe doit être complété</p><br>";
-}
+	}
     else {
         $passwordHash = password_hash($user["password"], PASSWORD_DEFAULT);
     }
 
     if(!filter_var($user["email"], FILTER_VALIDATE_EMAIL) ) {
          $errors[] = "<p>Votre EMAIL est invalide !!!</p><br>";         
-} 
+	} 
 
     if(!is_numeric($user["tel"]) || strlen($user["tel"]) !== 10) {
          $errors[] = "<p>Votre numéro de tel est invalide !!!</p><br>"; 
-}    
+	}    
 
     if(empty($user["adress"])) {
     $errors[] = "<p>Votre adresse doit être complétée</p><br>";
-}
+	}
 
     if(!is_numeric($user["zipcode"])) {
          $errors[] = "<p>Votre code postal est invalide !!!</p><br>"; 
-}        
+	}        
 
     if(empty($user["city"])) {
     $errors[] = "<p>Votre ville doit être complétée</p><br>";
-}
+	}
 
--
 }
 
 ?>
