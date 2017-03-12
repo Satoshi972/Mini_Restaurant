@@ -2,6 +2,7 @@
 session_start(); // Permet de démarrer la session
 require_once '../inc/connect.php';
 
+
 $maxSize = (1024 * 1000) * 2; // Taille maximum du fichier
 $uploadDir = 'uploads/'; // Répertoire d'upload
 $mimeTypeAvailable = ['image/jpg', 'image/jpeg', 'image/pjpeg', 'image/png', 'image/gif'];
