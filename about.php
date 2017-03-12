@@ -37,7 +37,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
 						<div class="col-xs-6">
 							<div class="media">
 								<div class="media-left">
-									<img  src="assets/img/the-barn-beef-burguer.jpg" class="media-object" style="width:500px;height:150px">
+									<img  src="<?=$restaurant['inf_picture']; ?>" class="media-object" style="width:500px;height:150px">
 								</div>
 							</div>
 						</div>
