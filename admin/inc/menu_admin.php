@@ -1,6 +1,13 @@
 <?php
 session_start();
 
+if(isset($_SESSION['is_logged'])){
+	$nomUser = $_SESSION['nom'];
+	$prenomUser = $_SESSION['prenom'];
+	$roleUser = $_SESSION['role'];
+}else{
+	header('location: ./../loggin.php');
+}
 ?><!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -15,7 +22,13 @@ session_start();
 <body>
 
 	<nav class="sidebar">
-		<div class="brand">Administration</div>
+		<div class="brand">
+			<?php if($roleUser == 'admin'): ?>
+				ADMINISTRATEUR
+			<?php elseif ($roleUser == 'editor'): ?>
+				EDITEUR
+			<?php endif; ?>
+		</div>
 			<div class="navside">
 				<ul>
 					<li><a href="#">menu 1</a></li>
