@@ -57,88 +57,88 @@ if(!empty($_POST)) { // si le tableau n'est pas vide alors on fait une boucle qu
 	<body>
 		<main class="page">
 
-		<?php include_once 'inc/menu.php'; ?>
+			<?php include_once 'inc/menu.php'; ?>
 
-		<div id="content" class="container">
-			<?php
-			if(isset($textErrors)){ ?>
+			<div id="content" class="container">
+				<?php
+				if(isset($textErrors)){ ?>
 				<div class="alert alert-danger" role="alert">
-				<?php echo '<p>'.$textErrors.'</p>'; ?>
-			</div>
-			<?php }
-			if(isset($success)){ ?>
+					<?php echo '<p>'.$textErrors.'</p>'; ?>
+				</div>
+				<?php }
+				if(isset($success)){ ?>
 				<div class="alert alert-success" role="alert">
-				<?php echo '<p>'.$success.'</p>'; ?>
-			</div>
-			<?php }
-			?>
-			<form class="well form-horizontal" method="post" id="contact_form">
-				<fieldset>
-					<!-- Form Name -->
-					<legend class="nameForm">Contactez-nous!</legend>
+					<?php echo '<p>'.$success.'</p>'; ?>
+				</div>
+				<?php }
+				?>
+				<form class="well form-horizontal" method="post" id="contact_form">
+					<fieldset>
+						<!-- Form Name -->
+						<legend class="nameForm">Contactez-nous!</legend>
 
-					<!-- last_name-->
-					<div class="form-group">
-						<label class="col-md-3 control-label" >Nom</label> 
-						<div class="col-md-6 inputGroupContainer">
-							<div class="input-group">
-								<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-								<input name="last_name" placeholder="Nom" class="form-control"  type="text">
+						<!-- last_name-->
+						<div class="form-group">
+							<label class="col-md-3 control-label" >Nom</label> 
+							<div class="col-md-6 inputGroupContainer">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+									<input name="last_name" placeholder="Nom" class="form-control"  type="text">
+								</div>
 							</div>
 						</div>
-					</div>
 
-					<!-- first_name-->
+						<!-- first_name-->
 
-					<div class="form-group">
-						<label class="col-md-3 control-label">Prénom</label>  
-						<div class="col-md-6 inputGroupContainer">
-							<div class="input-group">
-								<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-								<input  name="first_name" placeholder="Prénom" class="form-control"  type="text">
+						<div class="form-group">
+							<label class="col-md-3 control-label">Prénom</label>  
+							<div class="col-md-6 inputGroupContainer">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+									<input  name="first_name" placeholder="Prénom" class="form-control"  type="text">
+								</div>
 							</div>
 						</div>
-					</div>
 
-					<!-- email-->
+						<!-- email-->
 
-					<div class="form-group">
-						<label class="col-md-3 control-label">E-Mail</label>  
-						<div class="col-md-6 inputGroupContainer">
-							<div class="input-group">
-								<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-								<input name="email" placeholder="E-Mail Address" class="form-control"  type="text">
+						<div class="form-group">
+							<label class="col-md-3 control-label">E-Mail</label>  
+							<div class="col-md-6 inputGroupContainer">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+									<input name="email" placeholder="E-Mail Address" class="form-control"  type="text">
+								</div>
 							</div>
 						</div>
-					</div>
 
-					<!-- Text area -->
+						<!-- Text area -->
 
-					<div class="form-group">
-						<label class="col-md-3 control-label">Message</label>
-						<div class="col-md-6 inputGroupContainer">
-							<div class="input-group">
-								<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-								<textarea class="form-control"  rows="5" name="comment" placeholder="Votre message"></textarea>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Message</label>
+							<div class="col-md-6 inputGroupContainer">
+								<div class="input-group">
+									<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+									<textarea class="form-control"  rows="5" name="comment" placeholder="Votre message"></textarea>
+								</div>
 							</div>
 						</div>
-					</div>
 
-					<!-- Success message -->
-					<div class="alert alert-success" style="display: none" role="alert" id="success_message">Success <i class="glyphicon glyphicon-thumbs-up"></i> Merci de vous contacter, nous vous repondrons au plus vite !!!</div>
+						<!-- Success message -->
+						<div class="alert alert-success" style="display: none" role="alert" id="success_message">Success <i class="glyphicon glyphicon-thumbs-up"></i> Merci de vous contacter, nous vous repondrons au plus vite !!!</div>
 
-					<!-- Button -->
-					<div class="form-group">
-						<label class="col-md-4 control-label"></label>
-						<div class="col-md-4">
-							<button type="submit" class="btn btn-warning" >Envoyer <span class="glyphicon glyphicon-send"></span></button>
+						<!-- Button -->
+						<div class="form-group">
+							<label class="col-md-4 control-label"></label>
+							<div class="col-md-4">
+								<button type="submit" class="btn btn-warning" >Envoyer <span class="glyphicon glyphicon-send"></span></button>
+							</div>
 						</div>
-					</div>
 
-				</fieldset>
-			</form>
-		</div><!-- /.container -->
-		<
-		<?php include_once 'inc/script.php'; ?>
-	</body>
-</html>
+					</fieldset>
+				</form>
+			</div><!-- /.container -->
+			<
+			<?php include_once 'inc/script.php'; ?>
+			</body>
+			</html>

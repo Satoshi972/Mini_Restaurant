@@ -30,19 +30,20 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
 	<title>Détails de la recette</title>
 </head>
 <body>
+<main class="page">
 <?php include_once 'inc/menu.php'; ?>
-<div class="container">
-	<h1>Détails de la recette</h1>
- 
+<div id="content" class="container well">
+	
+	<legend class="nameForm"><h2>Détails de la recette</h2></legend>
     <?php if(!empty($added_recipe)): ?>
-	<h2><?php echo $added_recipe['rcp_title'];?></h2>
+	<h2 class="list"><?php echo $added_recipe['rcp_title'];?></h2>
 
-	<p><?php echo nl2br($added_recipe['rcp_content']); ?></p>
+	<p class="list"><?php echo nl2br($added_recipe['rcp_content']); ?></p>
     <!-- on affiche l'image récupérée dans notre tableau added_recipe avec les données récupérées dans la table, à défaut on affiche le nom de la rectte récupérée dans la table -->
 	<img src="<?=$added_recipe['rcp_picture'];?>" alt="<?php echo $added_recipe['rcp_title'];?>">
 
 
-	<p>Publié par <?php echo $added_recipe['usr_firstname'].' '.$added_recipe['usr_lastname'];?></p>
+	<p class="list">Publié par <?php echo $added_recipe['usr_firstname'].' '.$added_recipe['usr_lastname'];?></p>
 <?php else: ?>
 	Aucune recette trouvée !
 <?php endif; ?>
