@@ -1,55 +1,59 @@
 <?php 
 require_once '../inc/connect.php';
 
+
 if(!empty($_POST))
 {
-	$post = trim(strip_tags($_POST));
+	foreach($_POST as $key => $value){
+		$post[$key] = trim(strip_tags($value));
+	}
 
-	if(!filter_var($post,FILTER_VALIDATE_EMAIL))
+	if(!filter_var($post['email'],FILTER_VALIDATE_EMAIL))
 	{
 		$error = 'Erreur mail non valide';
-	}
-	if(!isset($error))
-	{
+
+	}else{
+
 		$sql = $bdd->prepare('SELECT usr_id, usr_email FROM users WHERE usr_email = :email');
+
 		$sql->bindValue(':email',$post['email']);
 
 		if($sql->execute())
 		{
-			$info = $sql->fetch(PDO::FETCH_ASSOC);
-			die(var_dump($info));
+				$info = $sql->fetch(PDO::FETCH_ASSOC);
+				
+				$nbretour = count($info);
 
-			$insert= $bdd->prepare('INSERT INTO reset_password (psw_token, psw_usr_id) VALUES (:token, :userId) ');
-			$insert->bindValue(':token',md5($post['usr_email']));
-			$insert->bindValue(':userId',$info['usr_id']);
+				print_r($nbretour.'<br>');
+				var_dump($info);
+		
 
-			if($insert->execute())
-			{
-				#récupération du token envoyé pour l'envoyer a l'utilisateur via mail afin de vérifier son identitée
-				$mail = $bdd->prepare("SELECT LAST(*) FROM reset_password WHERE psw_usr_id = :userId");
-				$mail->bindValue(':userId',$info['usr_id']);
+				if($nbretour == 2){
 
-				if($mail->execute())
-				{
-					$token = $mail->fetch(PDO::FETCH_ASSOC);
-					
-					#  https://www.w3schools.com/php/func_mail_mail.asp
-					# Envoi du mail contenant le token a l'utilisateur, token qui servira de verification
-					mail($post,'Réinitialisation de mot de passe',"<a href='localhost/Mini_Restaurant/psw_recorver_update?token=<?php=$token['psw_token']?>'>Votre lien de récupération</a>");
+					$insert= $bdd->prepare('INSERT INTO reset_password (psw_token, psw_usr_id) VALUES (:token, :userId) ');
+					$insert->bindValue(':token',md5($info['usr_email']));
+					$insert->bindValue(':userId',$info['usr_id']);
+
+					if($insert->execute())
+					{
+							$token = $insert->fetch(PDO::FETCH_ASSOC);
+							
+							#  https://www.w3schools.com/php/func_mail_mail.asp
+							# Envoi du mail contenant le token a l'utilisateur, token qui servira de verification
+							
+							$link = $_SERVER['SERVER_NAME'].'Mini_Restaurant/admin/';
+
+							mail($post,'Réinitialisation de mot de passe','<a href="'.$link.'psw_recorver_update?token='.$token['psw_token'].'">Votre lien de récupération</a>');
+
+							var_dump($token['psw_token']);
+					}else
+					{
+						die(var_dump($insert->errorInfo()));
+					}
+				}else{
+					$error = 'email inconnu ! ';
 				}
-				else
-				{
-					die(var_dump($mail->errorInfo()));
-				}
-
-			}
-			else
-			{
-				die(var_dump($insert->errorInfo()));
-			}
-
-		}
-		else
+		}else
 		{
 			die(var_dump($sql->errorInfo()));
 		}
