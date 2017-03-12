@@ -6,6 +6,7 @@ $site_info = $bdd->prepare('SELECT * FROM site_info');
 if($site_info->execute())
 {
 	$info = $site_info->fetchAll(PDO::FETCH_ASSOC);
+	die(var_dump($info));
 }
 else
 {
@@ -13,7 +14,7 @@ else
 }
 
 #recupere les information relative au recette afin de les afficher dynamiquement sur le site, les 3 derniere rectte
-$list_recipe = $bdd->prepare('SELECT * FROM recipe, users WHERE rcp_usr_id = usr_id ORDER BY DESC LIMIT 3 ');
+$list_recipe = $bdd->prepare('SELECT * FROM recipe, users WHERE rcp_usr_id = usr_id ');
 if($list_recipe->execute())
 {
 	$recipe = $list_recipe->fetchAll(PDO::FETCH_ASSOC);
