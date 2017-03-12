@@ -3,6 +3,7 @@
 session_start();
 require_once '../inc/connect.php';
 
+#requette pour afficher les role de façon dynamique 
 $sql = $bdd->prepare('SELECT * FROM role');
 if($sql->execute())
 {
@@ -18,6 +19,7 @@ else
 $error = array(); 
 $post = array();
 
+#si le formulaire est soumis, ont verrifie les données, apres les avoir nettoyer des espaces de debut et de fin + des tags html, php js
 if(!empty($_POST))
 {
 	foreach($_POST as $key => $value)
@@ -50,11 +52,11 @@ if(!empty($_POST))
 		$error[] = 'Erreur lors du choix du role';
 	}
 
-	if(count($error) > 0)
+	if(count($error) > 0) //s'il y a une erreur on affiche la "section" des erreur, qui afficherons les erreur relevées
 	{		
 		$formError = true;
 	}
-	else 
+	else //sinon on envoie les données dans la base de données
 	{
 		$req = $bdd->prepare('INSERT INTO users(usr_firstname, usr_lastname, usr_email, usr_password, usr_subscribedate, usr_rol_id) VALUES(:prenom, :nom, :email, :mdp, now(), :rol_id)');
 		$req->bindValue(':prenom', $post['firstname'], PDO::PARAM_STR);
@@ -70,7 +72,7 @@ if(!empty($_POST))
 		}
 		else
 		{
-			var_dump($req->errorInfo());
+			var_dump($req->errorInfo()); //afficher une erreur si l'envoi a la base de données c'est mal produite
 		}
 	}
 }

@@ -1,12 +1,12 @@
 <?php
 session_start();
 
-if(isset($_GET['loggout']) && ($_GET['loggout'] == 'yes'))
+if(isset($_GET['loggout']) && ($_GET['loggout'] == 'yes')) //si loggout est passé en paramettre dans l'url et que c'est egal a yes
 {
-	unset($_SESSION['nom'], $_SESSION['prenom'], $_SESSION['email'], $_SESSION['role']); 
+	unset($_SESSION['nom'], $_SESSION['prenom'], $_SESSION['email'], $_SESSION['role'], $_SESSION['is_logged']); //on retire les entré de notre tableau
 	session_destroy();
-	header('Location: loggin.php');
-	die();
+	header('Location: loggin.php');//redirection apres destrution de la session
+	die();//fin du script
 }
 
 ?>
@@ -25,14 +25,12 @@ if(isset($_GET['loggout']) && ($_GET['loggout'] == 'yes'))
 		?>
 		<div class="jumbotron">
 			<?php 
-
+			#s'il y a une session active, alors
 			if(isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['email'])): ?>
 					<p style="text-align:center;">
 						<?php echo $_SESSION['prenom']; ?>, veux-tu te déconnecter ? Vraiment ?
 
-						<br><br>
-						<img src="http://ronron.e-monsite.com/medias/images/chaton-triste.jpg" style="height:200px;border-radius:10px;">
-					
+						
 						<br><br>
 
 						<a href="log_out.php?loggout=yes">Oui, je veux me déconnecter</a>
@@ -40,10 +38,7 @@ if(isset($_GET['loggout']) && ($_GET['loggout'] == 'yes'))
 
 				<?php else: ?>
 					<p style="text-align:center;">
-						Tu es déjà déconnecté, tu n'existes pas !!
-
-						<br><br>
-						<img src="http://captainquizz.s3.amazonaws.com/quizz/551aeb19366880.99678770.jpg" style="height:200px;border-radius:10px;">
+						Vous etes déjà déconnecté
 					</p>
 			<?php 
 			endif; ?>

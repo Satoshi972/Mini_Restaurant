@@ -1,6 +1,7 @@
 <?php 
 require_once 'inc/connect.php';
 
+#recupere les information relatives au site pour permettre de les afficher dynamiquement ensuite
 $site_info = $bdd->prepare('SELECT * FROM site_info');
 if($site_info->execute())
 {
@@ -11,7 +12,8 @@ else
 	die(var_dump($site_info->errorInfo()));
 }
 
-$list_recipe = $bdd->prepare('SELECT * FROM recipe, users WHERE rcp_usr_id = usr_id');
+#recupere les information relative au recette afin de les afficher dynamiquement sur le site, les 3 derniere rectte
+$list_recipe = $bdd->prepare('SELECT * FROM recipe, users WHERE rcp_usr_id = usr_id ORDER BY DESC LIMIT 3 ');
 if($list_recipe->execute())
 {
 	$recipe = $list_recipe->fetchAll(PDO::FETCH_ASSOC);
@@ -34,15 +36,15 @@ else
 		<header class="page-header index-header">
 
 			<p>
-				<strong><a href="info_resto.php"><?php echo $info['inf_name'] ?></a></strong>
+				<strong><a href="info_resto.php"><?php echo $info['inf_name']; ?></a></strong>
 			</p>
 
 			<p>
-				<?php echo $info['inf_address'] ?>
+				<?php echo $info['inf_address'];?>
 			</p>
 
 			<p>
-				<?php echo $info['inf_number'] ?>
+				<?php echo $info['inf_number']; ?>
 			</p>
 
 			<p class="text-right">
