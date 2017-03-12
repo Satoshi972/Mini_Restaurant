@@ -43,12 +43,18 @@ else {
 									<td class="list"><?=$recipe['rcp_title']; ?></td>
 
 									<td>
-										<a href="view_recipe.php?id=<?=$recipe['rcp_id']; ?>"><button type="button" class="btn btn-default btn-sm">
+										<a href="view_recipe.php?id=<?=$recipe['rcp_id']; ?>"><button type="button" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-eye-open"></span>
 											Visualiser cette recette</button>
 										</a>
 									</td>
 									<td>
-										<a href="admin/delete_recipe.php?id=<?=$recipe['rcp_id']; ?>"><button type="button" class="btn btn-default btn-sm">
+										<a href="admin/modif_recipe.php?id=<?=$recipe['rcp_id']; ?>"><button type="button" class="btn btn-info btn-sm">
+											<span class="glyphicon glyphicon-edit"></span> Modifier
+											</button>
+										</a>
+									</td>
+									<td>
+										<a href="admin/delete_recipe.php?id=<?=$recipe['rcp_id']; ?>"><button type="button" class="btn btn-info btn-sm">
 											<span class="glyphicon glyphicon-remove"></span> Remove 
 											</button>
 										</a>
