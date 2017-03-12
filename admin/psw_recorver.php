@@ -24,10 +24,6 @@ if(!empty($_POST))
 				
 				$nbretour = count($info);
 
-				print_r($nbretour.'<br>');
-				var_dump($info);
-		
-
 				if($nbretour == 2){
 
 					$insert= $bdd->prepare('INSERT INTO reset_password (psw_token, psw_usr_id) VALUES (:token, :userId) ');
@@ -45,7 +41,7 @@ if(!empty($_POST))
 
 							mail($post,'Réinitialisation de mot de passe','<a href="'.$link.'psw_recorver_update?token='.$token['psw_token'].'">Votre lien de récupération</a>');
 
-							var_dump($token['psw_token']);
+							
 					}else
 					{
 						die(var_dump($insert->errorInfo()));
@@ -94,6 +90,7 @@ if(!empty($_POST))
 				<input type="submit" class="btn btn-primary">
 				</div>
 			</form>
+			
 		</div>
 	</main>
 	<?php require_once '../inc/script.php'; ?>
