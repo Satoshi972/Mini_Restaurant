@@ -87,13 +87,13 @@ if(!empty($_POST)){
 <html>
 <head>
 <meta charset="utf-8">
-	<?php include '../inc/head.php';?>
+	<?php include_once '../inc/head.php';?>
 <title>Ajouter une recette</title>
 
 </head>
 <body>
    	<main class="container">
-	<?php include '../inc/menu_admin.php'; ?>
+	<?php include_once '../inc/menu.php'; ?>
    
     <div class="jumbotron">
 	<h3>Ajouter une recette</h3>
@@ -131,6 +131,6 @@ if(!empty($_POST)){
 	<?php endif; ?>
     </div>
 
-    <?php include '../inc/script.php' ?>
+    <?php include_once '../inc/script.php' ?>
 </body>
 </html>
