@@ -20,9 +20,9 @@ if(isset($_GET['loggout']) && ($_GET['loggout'] == 'yes'))
 <body>
 
 	<main class="container">
-		<?php 
+		<!-- <?php 
 		include '../inc/menu_admin.php';
-		?>
+		?> -->
 		<div class="jumbotron">
 			<?php 
 

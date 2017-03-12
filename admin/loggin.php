@@ -78,7 +78,7 @@ if(!empty($_POST))
 <body>
 
 	<main class="container">
-	<?php include '../inc/menu_admin.php'; ?>
+	<!-- <?php include './inc/menu_admin.php'; ?> -->
 		<div class="jumbotron">
 			<?php 
 				if(isset($formError) && $formError){

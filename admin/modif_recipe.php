@@ -109,7 +109,7 @@ if(!empty($_POST)){
 	</head>
 	<body>
 		<main class="page">
-			<?php include_once '.inc/menu.php'; ?>
+			<!-- <?php include_once '.inc/menu.php'; ?> -->
 
 			<div id="content" class="well container">
 				<section class="row">
