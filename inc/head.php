@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
     
     <!-- Google font Kaushan Script-->
-    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
 
 
     <!-- Style CSS -->

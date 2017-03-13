@@ -24,12 +24,12 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
 	}
 }
 
-//////////////////////Moteur de recherche //////////////////////
+//////////////////////Moteur de recherche ////////////////////////////////////////////////////////////////////////////////////////
 $words = array ('de', 'du', 'des', 'le', 'la', 'les'); //Définition des pronoms à mettre en évidence 
   $str = "L'édition de cette année du 20 au 27 mars partout en France traitera des dernières tendances en vogue, 
           comme le phénomène des blogs ou encore l'internet mobile.";  //Texte à mettre en surbrillance
   echo preg_replace( '/('.implode('|', $words).')/i', '<span style="font-weight: bold; color: red;">$1</span>', $str); 
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ?><!DOCTYPE html>
 <html>
