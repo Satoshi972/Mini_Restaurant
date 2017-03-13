@@ -1,4 +1,5 @@
 <?php 
+
 require_once '../inc/connect.php';
 
 $displayForm = true;
@@ -7,43 +8,39 @@ if(isset($_GET['token']) && !empty($_GET['token']))
 {
 
 	$checkToken = $bdd->prepare("SELECT * FROM reset_password WHERE psw_token = :token");
-	$checkToken->bindValue(':token',$GET['token']);
+	$checkToken->bindValue(':token',$_GET['token']);
 
-	if($checkToken->execute())
-	{
-		if(!empty($_POST))
-		{
-			$post = trim(strip_tags($_POST));
-		}
+	if($checkToken->execute()){
 
-		if(strlen($post['password'])<8)
-		{
-			$error = 'Le mot de passe doit fait minimum 8 charactères';
-		}
+		$infoToken = $checkToken->fetch(PDO::FETCH_ASSOC);
 
-		if(!isset($error))
-		{
-			$change_psw = $bdd->prepare('UPDATE users, reset_password SET (usr_psw) VALUES (:psw) WHERE urs_id = psw_urs_psw');
-			$change_psw-> bindValue(':psw', password_hash($post['password'],PASSWORD_DEFAULT));
+		if(!empty($_POST)){
+			$post = array_map('trim',array_map('strip_tags', $_POST));
 
-			if($change_psw->execute())
-			{
-				$del = $bdd->prepare('DELETE FROM reset_password WHERE psw_token = :token');
-				$del->bindValue('token', $GET['token']);
+			if(strlen($post['password'])<8){
+				$error = 'Le mot de passe doit fait minimum 8 charactères';
+			}
 
-				if(!$del->execute())
-				{
-					die(var_dump($del->errorInfo()));
+			if(!isset($error)){
+				$change_psw = $bdd->prepare('UPDATE users SET usr_password = :psw WHERE users.usr_id = :id_token');
+				
+				$change_psw-> bindValue(':psw', password_hash($post['password'],PASSWORD_DEFAULT));
+				$change_psw-> bindValue(':id_token', $infoToken['psw_usr_id']);
+
+				if($change_psw->execute()){
+					$del = $bdd->prepare('DELETE FROM reset_password WHERE psw_token = :token');
+					$del->bindValue('token', $_GET['token']);
+
+					if(!$del->execute()){
+						die(var_dump($del->errorInfo()));
+					}
+				}else{
+					die(var_dump($change_psw->errorInfo()));
 				}
-			}
-			else
-			{
-				die(var_dump($change_psw->errorInfo()));
-			}
-		}	
-	}
-	else
-	{
+			}	
+		}
+
+	}else{
 		die(var_dump($checkToken->errorInfo()));
 	}
 
@@ -66,7 +63,6 @@ else
 	<main class="container">
 		
 		<!-- contient mon menu -->
-		<?php require_once '../inc/menu_admin.php'; ?>
 		<div class="jumbotron">
 
 			<?php 

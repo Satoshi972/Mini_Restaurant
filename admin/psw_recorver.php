@@ -1,7 +1,7 @@
 <?php 
 session_start();
 
-require_once 'inc/verif_session.php';
+
 require_once '../inc/connect.php';
 
 if(!empty($_POST))
@@ -42,8 +42,11 @@ if(!empty($_POST))
 							$headers  = 'MIME-Version: 1.0' . "\r\n";
 							$headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 
+
+							$siteAdd = $_SERVER['SERVER_NAME'];
+
 							// $data = "<a href='psw_recorver_update?token=.$token.'>Votre lien de récupération</a>";
-							$data = "<a href='http://www.google.fr'>lien vers google</a>";
+							$data = "<a href='http://localhost/WF3_PERDAF/GitubProject/Projet WF3/Mini_Restaurant/admin/psw_recorver_update.php?token=.$token.'>Changer votre mot de passe</a>";
 
 
 							mail($post['email'],'Réinitialisation de mot de passe', $data, $headers);
@@ -70,11 +73,11 @@ if(!empty($_POST))
 
 	<?php include '../inc/head.php'; ?>
 
-	<link rel="stylesheet" type="text/css" href="assets/css/styleAdmin.css">
+
 
 </head>
 <body>
-		<?php require_once './inc/menu_admin.php'; ?>
+
 	<main class="container">
 
 		<div class="jumbotron">

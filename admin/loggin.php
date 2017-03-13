@@ -2,7 +2,7 @@
 
 session_start();
 
-require_once 'inc/verif_session.php';
+// require_once 'inc/verif_session.php';
 require_once '../inc/connect.php';
 
 $err = array();
@@ -51,6 +51,8 @@ if(!empty($_POST))
 							);
 					$_SESSION['is_logged'] = true;
 					$display = false;
+
+					header('location: add_recipe.php');
 				}
 				else 
 				{ 
@@ -78,9 +80,6 @@ if(!empty($_POST))
 	<link rel="stylesheet" href="assets/css/styleAdmin.css">
 </head>
 <body>
-	<?php 
-		include 'inc/menu_admin.php';
-	?>
 	<main class="container">
 	
 
@@ -114,8 +113,12 @@ if(!empty($_POST))
 				</div>
 				
 
-				<div class="text-center">
+				<div class="form-group text-center">
+					
 					<input type="submit" value="Se connecter" class="btn btn-default">
+				
+					<a href="psw_recorver.php" class="btn btn-info">Mot de passe oublier</a>
+				
 				</div>
 				
 			</form>
