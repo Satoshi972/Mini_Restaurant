@@ -1,7 +1,7 @@
 <?php
 session_start(); // Permet de démarrer la session
 
-require_once './inc/verif_session.php';
+require_once '../inc/verif_session.php';
 
 require_once '../inc/connect.php';
 

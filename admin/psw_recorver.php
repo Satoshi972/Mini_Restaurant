@@ -1,7 +1,6 @@
 <?php 
 require_once '../inc/connect.php';
 
-
 if(!empty($_POST))
 {
 	foreach($_POST as $key => $value){
@@ -35,13 +34,9 @@ if(!empty($_POST))
 					if($insert->execute()){
 
 
-							$headers = 'From: webmaster@example.com' . "\r\n" .
-									    'Reply-To: webmaster@example.com' . "\r\n" .
-									    'X-Mailer: PHP/' . phpversion();
-
 							$data = "<a href='psw_recorver_update?token=".$token."'>Votre lien de récupération</a>";							
 
-							mail($post['email'],'Réinitialisation de mot de passe', $data, $headers);
+							mail($post['email'],'Réinitialisation de mot de passe', $data);
 
 							
 					}else
