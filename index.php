@@ -31,8 +31,11 @@ else
 	<?php require_once 'inc/head.php'; ?>
 </head>
 <body>
+
 	<main class="container-full index-main">
+	
 		<header class="page-header index-header">
+
 			<p>
 				<strong><a href="info_resto.php"><?php echo $info['inf_name']; ?></a></strong>
 			</p>
@@ -43,6 +46,7 @@ else
 
 			<p>
 				<?php echo $info['inf_phone']; ?>
+
 			</p>
 
 			<p class="text-right">
@@ -54,7 +58,7 @@ else
 		<section class="text-center">
 			<img class="img-responsive" src="<?php $info['inf_picture']; ?>" alt="Header restaurant">
 		</section>
-		
+
 		<section class="col-xs-12">
 		<?php 
 			foreach ($recipe as $key => $value) :
@@ -73,8 +77,10 @@ else
 				</a>
 			</div>
 		</section>
-		
+		<?php require_once 'inc/footer.php'; ?>
 	</main>
-	<?php require_once 'inc/script.php' ?>
+	
+	<?php require_once 'inc/script.php'; 
+	?>
 </body>
 </html>

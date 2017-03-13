@@ -67,7 +67,6 @@ else {
 				</section>
 			</div>
 		</main>
-
 		<?php include_once 'inc/script.php'; ?>
 	</body>
 </html>

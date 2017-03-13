@@ -1,8 +1,11 @@
 	<!-- Pour etre sur que ie utilise la derniere version du moteur de rendu -->
     <meta http-equiv="X-UA-Compatible" content="IE-Edge">
 
-	<!-- Bootstrap CSS -->
+	<!-- Bootstrap CSS 3 -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    
+    <!-- Bootstrap font-awesome  -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Latest compiled and minified CSS For Bootstrap select -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
