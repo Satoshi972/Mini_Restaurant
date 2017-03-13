@@ -12,7 +12,7 @@ else
 }
 
 
-$list_recipe = $bdd->prepare('SELECT * FROM recipe, users WHERE rcp_usr_id = usr_id ordre ORDER BY rcp_id DESC LIMIT 3');
+$list_recipe = $bdd->prepare('SELECT * FROM recipe, users WHERE rcp_usr_id = usr_id ORDER BY rcp_id DESC LIMIT 3');
 if($list_recipe->execute())
 {
 	$recipe = $list_recipe->fetchAll(PDO::FETCH_ASSOC);
@@ -50,34 +50,28 @@ else
 			</p>
 
 		</header>
-
+		
 		<section class="text-center">
-			<img class="img-responsive" src="<?php $info['inf_picture'] ?>" alt="Header restaurant">
+			<img class="img-responsive" src="<?php $info['inf_picture']; ?>" alt="Header restaurant">
 		</section>
-
+		
 		<section class="col-xs-12">
-			<legend class="text-center">Les recettes du chefs</legend>
+		<?php 
+			foreach ($recipe as $key => $value) :
+		?>
 			<figure class="col-md-4">
-				<img class="img-responsive" src="<?php $recipe ?>" alt="Recette du chef 1">
-				<a href="recipe_details.php?id=<?php $recipe['rcp_id'] ?>">lire la recette</a>
+				<img class="img-responsive" src="<?php $value['rcp_picture'] ?>" alt="Recette du chef">
+				<a href="view_recipe.php?id=<?php echo $value['rcp_id']; ?>">lire la recette</a>
 			</figure>
 
-			<figure class="col-md-4">
-				<img class="img-responsive" src="<?php $recipe ?>" alt="Recette du chef 2">
-				<a href="recipe_details.php?id=<?php $recipe['rcp_id'] ?>">lire la recette</a>
-			</figure>
-
-			<figure class="col-md-4">
-				<img class="img-responsive" src="<?php $recipe ?>" alt="Recette du chef 3">
-				<a href="recipe_details.php?id=<?php $recipe['rcp_id'] ?>">lire la recette</a>
-			</figure>
-
+		<?php 
+			endforeach;
+		?>
 			<div class="text-center">
 				<a href="recipe_list.php">
 					<button>Découvrir toutes les recettes des chefs</button>
 				</a>
 			</div>
-
 		</section>
 		
 	</main>
