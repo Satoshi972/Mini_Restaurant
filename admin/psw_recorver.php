@@ -42,7 +42,9 @@ if(!empty($_POST))
 							$headers  = 'MIME-Version: 1.0' . "\r\n";
 							$headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 
-							$data = "<a href='psw_recorver_update?token=.$token.'>Votre lien de récupération</a>";							
+							// $data = "<a href='psw_recorver_update?token=.$token.'>Votre lien de récupération</a>";
+							$data = "<a href='http://www.google.fr'>lien vers google</a>";
+
 
 							mail($post['email'],'Réinitialisation de mot de passe', $data, $headers);
 
