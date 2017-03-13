@@ -1,26 +1,27 @@
 <?php 
 require_once 'inc/connect.php';
 
-$site_info = $bdd->prepare('SELECT * FROM site_info');
+$site_info = $bdd->prepare('SELECT * FROM site_info ORDER BY inf_id DESC LIMIT 3');
 if($site_info->execute())
 {
-	$info = $site_info->fetchAll(PDO::FETCH_ASSOC);
+	$info = $site_info->fetch(PDO::FETCH_ASSOC);
 }
 else
 {
 	die(var_dump($site_info->errorInfo()));
 }
 
-$list_recipe = $bdd->prepare('SELECT * FROM recipe, users WHERE rcp_usr_id = usr_id');
+
+$list_recipe = $bdd->prepare('SELECT * FROM recipe, users WHERE rcp_usr_id = usr_id ordre ORDER BY rcp_id DESC LIMIT 3');
 if($list_recipe->execute())
 {
 	$recipe = $list_recipe->fetchAll(PDO::FETCH_ASSOC);
+	//var_dump($recipe);
 }
 else
 {
 	die(var_dump($list_recipe->errorInfo()));
 }
-
 
 ?><!DOCTYPE html>
 <html lang="fr">
@@ -32,17 +33,16 @@ else
 <body>
 	<main class="container-full index-main">
 		<header class="page-header index-header">
-
 			<p>
-				<strong><a href="info_resto.php"><?php echo $info['inf_name'] ?></a></strong>
+				<strong><a href="info_resto.php"><?php echo $info['inf_name']; ?></a></strong>
 			</p>
 
 			<p>
-				<?php echo $info['inf_address'] ?>
+				<?php echo $info['inf_address']; ?>
 			</p>
 
 			<p>
-				<?php echo $info['inf_number'] ?>
+				<?php echo $info['inf_phone']; ?>
 			</p>
 
 			<p class="text-right">
