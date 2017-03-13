@@ -4,7 +4,7 @@ require_once 'inc/connect.php';
 $site_info = $bdd->prepare('SELECT * FROM site_info');
 if($site_info->execute())
 {
-	$info = $site_info->fetchAll(PDO::FETCH_ASSOC);
+	$info = $site_info->fetch(PDO::FETCH_ASSOC);
 }
 else
 {
@@ -30,8 +30,11 @@ else
 	<?php require_once 'inc/head.php'; ?>
 </head>
 <body>
+
 	<main class="container-full index-main">
+	
 		<header class="page-header index-header">
+			
 
 			<p>
 				<strong><a href="info_resto.php"><?php echo $info['inf_name'] ?></a></strong>
@@ -42,7 +45,7 @@ else
 			</p>
 
 			<p>
-				<?php echo $info['inf_number'] ?>
+				<?php echo $info['inf_phone'] ?>
 			</p>
 
 			<p class="text-right">
@@ -54,7 +57,7 @@ else
 		<section class="text-center">
 			<img class="img-responsive" src="<?php $info['inf_picture'] ?>" alt="Header restaurant">
 		</section>
-
+	
 		<section class="col-xs-12">
 			<legend class="text-center">Les recettes du chefs</legend>
 			<figure class="col-md-4">
@@ -79,8 +82,10 @@ else
 			</div>
 
 		</section>
-		
+		<?php require_once 'inc/footer.php'; ?>
 	</main>
-	<?php require_once 'inc/script.php' ?>
+	
+	<?php require_once 'inc/script.php'; 
+	?>
 </body>
 </html>
