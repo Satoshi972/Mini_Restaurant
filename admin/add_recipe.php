@@ -5,7 +5,6 @@ require_once './inc/verif_session.php';
 
 require_once '../inc/connect.php';
 
-
 if(!isset($_SESSION['is_logged']) || empty($_SESSION['is_logged']))
 {
 	die(header("Location : loggin.php"));
@@ -75,8 +74,8 @@ if(!empty($_POST)){
 		$request->bindValue(':title', $post['title']);
 		$request->bindValue(':content', $post['content']);
 
-    $request->bindValue(':picture', $uploadDir.$newPictureName);
 
+    $request->bindValue(':picture', $uploadDir.$newPictureName);
     
     if($request->execute()){
         $success = 'Bravo, la recette a bien été ajoutée';
