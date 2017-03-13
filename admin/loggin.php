@@ -2,7 +2,7 @@
 
 session_start();
 
-require_once 'inc/verif_session.php';
+//require_once 'inc/verif_session.php';
 require_once '../inc/connect.php';
 
 $err = array();
@@ -51,6 +51,7 @@ if(!empty($_POST))
 							);
 					$_SESSION['is_logged'] = true;
 					$display = false;
+					header('Location: add_recipe.php');
 				}
 				else 
 				{ 
@@ -75,12 +76,9 @@ if(!empty($_POST))
 	<title>Connexion</title>
 	<meta charset="utf-8">
 	<?php include '../inc/head.php';?>
-	<link rel="stylesheet" href="assets/css/styleAdmin.css">
+	
 </head>
 <body>
-	<?php 
-		include 'inc/menu_admin.php';
-	?>
 	<main class="container">
 	
 
