@@ -6,6 +6,11 @@ require_once './inc/verif_session.php';
 require_once '../inc/connect.php';
 
 
+if(!isset($_SESSION['is_logged']) || empty($_SESSION['is_logged']))
+{
+	die(header("Location : loggin.php"));
+}
+
 $maxSize = (1024 * 1000) * 2; // Taille maximum du fichier
 $uploadDir = 'uploads/'; // Répertoire d'upload
 $mimeTypeAvailable = ['image/jpg', 'image/jpeg', 'image/pjpeg', 'image/png', 'image/gif'];
@@ -69,6 +74,8 @@ if(!empty($_POST)){
 		$request->bindValue(':title', $post['title']);
 		$request->bindValue(':content', $post['content']);
     $request->bindValue(':picture', $uploadDir.$newPictureName);
+    $request->bindValue(':userId', $_SESSION['id']);
+
     
     if($request->execute()){
         $success = 'Bravo, la recette a bien été ajoutée';
