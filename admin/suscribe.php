@@ -90,7 +90,7 @@ if(!empty($_POST))
 
 </head>
 <body>
-	<?php include './inc/menu_admin.php'; ?>
+	<?php include 'inc/menu_admin.php'; ?>
 	<main class="container">
 		<?php 
 				// include '../inc/menu_admin.php';
