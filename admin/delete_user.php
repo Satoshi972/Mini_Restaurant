@@ -53,10 +53,15 @@ if(isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id']))
 <?php include_once '../inc/head.php'; ?>
 	<meta charset="UTF-8">
 	<title>Au revoir</title>
+
+	<?php include '../inc/head.php'; ?>
+
+	<link rel="stylesheet" type="text/css" href="assets/css/styleAdmin.css">
+
 </head>
 <body>
+			<?php include_once './inc/menu_admin.php'; ?>
 	<main class="page">
-			<?php include_once '../inc/menu.php'; ?>
 
 			<div id="content" class=" well container">
 				<section class="row">

@@ -1,4 +1,7 @@
 <?php 
+session_start();
+
+require_once 'inc/verif_session.php';
 require_once '../inc/connect.php';
 
 if(!empty($_POST))
@@ -34,9 +37,14 @@ if(!empty($_POST))
 					if($insert->execute()){
 
 
-							$data = "<a href='psw_recorver_update?token=".$token."'>Votre lien de récupération</a>";							
+							// le header indispenssable pour des mail avec du html
+							// To send HTML mail, the Content-type header must be set
+							$headers  = 'MIME-Version: 1.0' . "\r\n";
+							$headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 
-							mail($post['email'],'Réinitialisation de mot de passe', $data);
+							$data = "<a href='psw_recorver_update?token=.$token.'>Votre lien de récupération</a>";							
+
+							mail($post['email'],'Réinitialisation de mot de passe', $data, $headers);
 
 							
 					}else
@@ -52,20 +60,21 @@ if(!empty($_POST))
 		}
 	}
 }
-
-
-?>
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="fr">
 <head>
 	<meta charset="UTF-8">
 	<title>Récuperation de mot de passe</title>
-	<?php require_once '../inc/head.php'; ?>
+
+	<?php include '../inc/head.php'; ?>
+
+	<link rel="stylesheet" type="text/css" href="assets/css/styleAdmin.css">
+
 </head>
 <body>
+		<?php require_once './inc/menu_admin.php'; ?>
 	<main class="container">
 
-		<?php require_once '../inc/menu_admin.php'; ?>
 		<div class="jumbotron">
 
 			<form method="post" class="formhorizontal">
