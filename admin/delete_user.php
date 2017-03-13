@@ -11,7 +11,7 @@ if(isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id']))
 	$user_id = (int) $_GET['id'];
 	
 	// On sélectionne l'utilisateur et ses recettes pour être sur qu'elle existe et faire un rappel
-	$select = $bdd->prepare('SELECT users.usr_lastname, users.usr_firstname, recipe.rcp_title, recipe.rcp_content FROM users INNER JOIN recipe ON users.usr_id = recipe.rcp_usr_id WHERE usr_id = :idUser');
+	$select = $bdd->prepare('SELECT users.usr_lastname, users.usr_firstname, recipe.rcp_title, recipe.rcp_content FROM users  LEFT JOIN recipe ON users.usr_id = recipe.rcp_usr_id WHERE usr_id = :idUser');
 	$select->bindValue(':idUser', $user_id, PDO::PARAM_INT);
 
 	if($select->execute())
