@@ -3,7 +3,8 @@ session_start();
 require_once '../inc/connect.php';
 
 // Permet de vérifier que mon id est présent et de type numérique
-if(isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])){
+if(isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id']))
+{
 
 	$user_id = (int) $_GET['id'];
 
@@ -11,21 +12,32 @@ if(isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])){
 	$select = $bdd->prepare('SELECT usr_lastname, usr_firstname, rcp_title, rcp_content FROM users INNER JOIN recipe ON users.usr_id=recipe.rcp_usr_id WHERE usr_id = :idUser');
 	$select->bindValue(':idUser', $user_id, PDO::PARAM_INT);
 
-	if($select->execute()){
+	if($select->execute())
+	{
 		$my_user_recipe = $select->fetch(PDO::FETCH_ASSOC);
 	}
 	
-	if(!empty($_POST)){
+	if(!empty($_POST))
+	{
 		// Si la valeur du champ caché ayant pour name="action" est égale a delete, alors je supprime
-		if(isset($_POST['action']) && $_POST['action'] === 'delete'){
-			$delete = $bdd->prepare('DELETE usr_firstname, usr_lastname, rcp_title, rcp_content, rcp_picture FROM users INNER JOIN recipe ON users.usr_id = recipe.rcp_usr_id WHERE usr_id = :id');
-			$delete->bindValue(':id', $user_id, PDO::PARAM_INT);
+		if(isset($_POST['action']) && $_POST['action'] === 'delete')
+		{
+			try
+			{
+				$delU = $bdd->prepare('DELETE FROM users WHERE usr_id = :id');
+				$delU->bindValue(':id', $user_id, PDO::PARAM_INT);
+				$delR = $bdd->prepare('DELETE FROM recipe WHERE rcp_usr_id = usr_id AND usr_id = id');
+				$delR->bindValue(':id', $user_id, PDO::PARAM_INT);
 
-			if($delete->execute()){
+				$delR->execute();
+				$delU->execute();
+
 				$success = 'La recette a bien été supprimée';
+
 			}
-			else {
-				var_dump($delete->errorInfo()); 
+			catch (Exception $e)
+			{
+				echo 'Exception reçue : ',  $e->getMessage(), "\n";
 				die;
 			}
 		}
