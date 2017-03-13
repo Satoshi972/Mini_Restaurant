@@ -43,11 +43,6 @@ if(isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])){
 
 		<?php include '../inc/head.php'; ?>
 
-		<link rel="stylesheet" type="text/css" href="assets/css/styleAdmin.css">
-		
-		<!-- <link rel="stylesheet" href="../assets/css/style.css"> -->
-	
-
 	</head>
 	<body>
 

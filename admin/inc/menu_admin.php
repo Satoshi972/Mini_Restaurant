@@ -18,8 +18,7 @@
 				<div class="navside">
 					<ul>
 						<div class="titreMenu">Gestion du Site</div>
-						<li><a href="#">Coordonnées</a></li>
-						<li><a href="#">Photo de couverture</a></li>
+						<li><a href="management.php">Management</a></li>
 					</ul>	
 				</div>
 				<div class="navside">
@@ -34,7 +33,7 @@
 				<div class="navside">
 					<ul>
 						<div class="titreMenu">Gestion des Contacts</div>
-						<li><a href="list_contact.php">Liste des fiches de contacts</a></li>
+						<li><a href="list_contact.php">Liste fiches contacts</a></li>
 
 					</ul>	
 				</div>
@@ -42,7 +41,7 @@
 					<ul>
 						<div class="titreMenu">Gestion des Utilisateurs</div>
 						<li><a href="suscribe.php">Creer un Utilisateur</a></li>
-						<li><a href="delete_user">Suppression utilisateur</a></li>
+						<li><a href="list_users.php">Suppression utilisateur</a></li>
 
 					</ul>	
 				</div>

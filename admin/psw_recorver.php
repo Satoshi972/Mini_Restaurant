@@ -69,9 +69,7 @@ if(!empty($_POST))
 	<title>Récuperation de mot de passe</title>
 
 	<?php include '../inc/head.php'; ?>
-
-	<link rel="stylesheet" type="text/css" href="assets/css/styleAdmin.css">
-
+	
 </head>
 <body>
 		<?php require_once './inc/menu_admin.php'; ?>

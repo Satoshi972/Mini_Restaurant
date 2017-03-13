@@ -21,27 +21,24 @@ $post = array();
 
 if(!empty($_POST))
 {
-	foreach($_POST as $key => $value)
-	{
-		$post[$key] = trim(strip_tags($value));
-	}
+	$post= array_map('trim', array_map('strip_tags', $_POST));
 
-	if(strlen($post['firstname']) < 3)
+	if(!preg_match('#^[a-z0-9._-]{3,}$#', $post['firstname']))
 	{
 		$error[] = 'Le prénom doit faire au moins 3 caractères';
 	}
 
-	if(strlen($post['lastname']) < 3)
+	if(!preg_match('#^[a-z0-9._-]{3,}$#', $post['lastname']))
 	{
 		$error[] = 'Le nom doit faire au moins 3 caractères';
 	}
 
-	if(!filter_var($post['email'], FILTER_VALIDATE_EMAIL))
+	if(!preg_match('#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#', $post['email'])) 
 	{
 		$error[] = 'L\'adresse email est invalide';
 	}
 
-	if(strlen($post['password']) < 8 || strlen($post['password']) > 20)
+	if(!preg_match('#^[a-z0-9._-]{8,20}$#', $post['password'])) 
 	{
 		$error[] = 'Le mot de passe doit comporter entre 8 et 20 caractères maximum';
 	}
@@ -66,7 +63,7 @@ if(!empty($_POST))
 		if($req->execute())
 		{
 			$createSuccess = true;
-			header('Location: loggin.php'); // On redirige vers la page de connexion
+			//header('Location: loggin.php'); // On redirige vers la page de connexion
 			die();
 		}
 		else
@@ -82,12 +79,8 @@ if(!empty($_POST))
 	<meta charset="utf-8">
 
 	<title>Inscription</title>
-
 	<?php include '../inc/head.php'; ?>
-
-	<link rel="stylesheet" type="text/css" href="assets/css/styleAdmin.css">
-
-
+	
 </head>
 <body>
 	<?php include 'inc/menu_admin.php'; ?>
@@ -106,23 +99,23 @@ if(!empty($_POST))
 		<form method="post" class="form-horizontal jumbotron">
 
 			<div class="form-group">
-			<label for="firstname">Prénom</label>
-			<input class="form-control" type="text" id="firstname" name="firstname" placeholder="Votre prénom.." required>
+				<label for="firstname">Prénom</label>
+				<input class="form-control" type="text" id="firstname" name="firstname" placeholder="Le prénom.." required>
 			</div>
 
 			<div class="form-group">
-			<label for="lastname">Nom</label>
-			<input class="form-control" type="text" id="lastname" name="lastname" placeholder="Votre nom de famille.." required>
+				<label for="lastname">Nom</label>
+				<input class="form-control" type="text" id="lastname" name="lastname" placeholder="Le nom de famille.." required>
 			</div>
 
 			<div class="form-group">
-			<label for="email">Email</label>
-			<input class="form-control" type="email" id="email" name="email" placeholder="votre@email.fr">
+				<label for="email">Email</label>
+				<input class="form-control" type="email" id="email" name="email" placeholder="votre@email.fr">
 			</div>
 
 			<div class="form-group">
-			<label for="password">Mot de passe</label>
-			<input class="form-control" type="password" id="password" name="password" placeholder="Un mot de passe super compliqué" required>
+				<label for="password">Mot de passe</label>
+				<input class="form-control" type="password" id="password" name="password" placeholder="Un mot de passe super compliqué" required>
 			</div>
 
 			<div class="form-group">

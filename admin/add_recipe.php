@@ -2,14 +2,7 @@
 session_start(); // Permet de démarrer la session
 
 require_once 'inc/verif_session.php';
-
 require_once '../inc/connect.php';
-
-
-if(!isset($_SESSION['is_logged']) || empty($_SESSION['is_logged']))
-{
-	die(header("Location : loggin.php"));
-}
 
 $maxSize = (1024 * 1000) * 2; // Taille maximum du fichier
 $uploadDir = 'uploads/'; // Répertoire d'upload
@@ -25,11 +18,11 @@ if(!empty($_POST)){
 		$post[$key] = trim(strip_tags($value));
 	}
 	// si la valeur titre a moins de 5 ou plus de 50 caractères, alors "erreur"
-	if(strlen($post['title']) < 5 || strlen($post['title']) > 50){
+	if(!preg_match('#^[a-z0-9._-]{5,140}$#', $post['title'])){
 		$errors[] = 'Le titre doit contenir de 5 à 50 caractères';
 	}
 	// si la valeur recette a moins de 20 caractères, alors "erreur"
-	if(strlen($post['content']) < 20){
+	if(!preg_match('#^[a-z0-9._-]{20,}$#', $post['content'])){
 		$errors[] = 'La recette doit contenir au moins 20 caractères';
 	}
 	// si le fichier image est défini et ne comporte pas d'erreur
@@ -100,8 +93,6 @@ if(!empty($_POST)){
 		<title>Ajouter une recette</title>
 
 		<?php include '../inc/head.php'; ?>
-
-		<link rel="stylesheet" type="text/css" href="assets/css/styleAdmin.css">
 
 	</head>
 	<body>

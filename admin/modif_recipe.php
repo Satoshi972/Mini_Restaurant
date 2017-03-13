@@ -106,11 +106,7 @@ if(!empty($_POST)){
 		<meta charset="utf-8">
 		<title>Modifier une recette</title>
 
-		<?php include '../inc/head.php'; ?>
-
-		<link rel="stylesheet" type="text/css" href="assets/css/styleAdmin.css">
-
-		<link rel="stylesheet" href="../assets/css/style.css">		
+		<?php include '../inc/head.php'; ?>	
 
 	</head>
 	<body>

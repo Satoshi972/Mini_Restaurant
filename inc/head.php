@@ -1,4 +1,4 @@
-	<!-- Pour etre sur que ie utilise la derniere version du moteur de rendu -->
+    <!--Pour etre sur que ie utilise la derniere version du moteur de rendu -->
     <meta http-equiv="X-UA-Compatible" content="IE-Edge">
 
 	<!-- Bootstrap CSS -->
@@ -11,8 +11,11 @@
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet"> 
 
 
-    <!-- Style CSS -->
+    <!-- Style CSS du font-->
     <link rel="stylesheet" href="assets/css/style.css">
+    
+    <!-- Style CSS du back -->
+    <link rel="stylesheet" type="text/css" href="assets/css/styleAdmin.css">
 
     <!-- HTML5 Shiv-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" integrity="sha256-3Jy/GbSLrg0o9y5Z5n1uw0qxZECH7C6OQpVBgNFYa0g=" crossorigin="anonymous"></script>

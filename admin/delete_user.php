@@ -46,6 +46,10 @@ if(isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id']))
 		}
 	}
 }
+else
+{
+	header('Location : list_users.php')
+}
 
 ?><!DOCTYPE html>
 <html lang="fr">
@@ -55,8 +59,6 @@ if(isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id']))
 	<title>Au revoir</title>
 
 	<?php include '../inc/head.php'; ?>
-
-	<link rel="stylesheet" type="text/css" href="assets/css/styleAdmin.css">
 
 </head>
 <body>

@@ -20,8 +20,6 @@ if(isset($_GET['loggout']) && ($_GET['loggout'] == 'yes'))
 
 	<?php include '../inc/head.php'; ?>
 
-	<link rel="stylesheet" type="text/css" href="assets/css/styleAdmin.css">
-
 </head>
 <body>
 
