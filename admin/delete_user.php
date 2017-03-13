@@ -1,5 +1,7 @@
 <?php
 session_start();
+
+require_once './inc/verif_session.php';
 require_once '../inc/connect.php';
 
 // Permet de vérifier que mon id est présent et de type numérique
@@ -7,15 +9,15 @@ if(isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id']))
 {
 
 	$user_id = (int) $_GET['id'];
-
+	
 	// On sélectionne l'utilisateur et ses recettes pour être sur qu'elle existe et faire un rappel
-	$select = $bdd->prepare('SELECT usr_lastname, usr_firstname, rcp_title, rcp_content FROM users INNER JOIN recipe ON users.usr_id=recipe.rcp_usr_id WHERE usr_id = :idUser');
+	$select = $bdd->prepare('SELECT users.usr_lastname, users.usr_firstname, recipe.rcp_title, recipe.rcp_content FROM users INNER JOIN recipe ON users.usr_id = recipe.rcp_usr_id WHERE usr_id = :idUser');
 	$select->bindValue(':idUser', $user_id, PDO::PARAM_INT);
 
 	if($select->execute())
 	{
 		$my_user_recipe = $select->fetch(PDO::FETCH_ASSOC);
-	}
+	} 
 	
 	if(!empty($_POST))
 	{
@@ -26,7 +28,8 @@ if(isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id']))
 			{
 				$delU = $bdd->prepare('DELETE FROM users WHERE usr_id = :id');
 				$delU->bindValue(':id', $user_id, PDO::PARAM_INT);
-				$delR = $bdd->prepare('DELETE FROM recipe WHERE rcp_usr_id = usr_id AND usr_id = id');
+				
+				$delR = $bdd->prepare('DELETE FROM recipe WHERE rcp_usr_id = usr_id');
 				$delR->bindValue(':id', $user_id, PDO::PARAM_INT);
 
 				$delR->execute();
@@ -44,21 +47,6 @@ if(isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id']))
 	}
 }
 
-//DELETE FROM Sales.SalesPersonQuotaHistory 
-//FROM Sales.SalesPersonQuotaHistory AS spqh
-//INNER JOIN Sales.SalesPerson AS sp
-//ON spqh.BusinessEntityID = sp.BusinessEntityID
-//WHERE sp.SalesYTD > 2500000.00;
-
-//DELETE FROM Store_Information
-//WHERE Store_Name IN
-//(SELECT Store_Name FROM Geography
-//WHERE Region_Name = 'East');
-//
-//DELETE * FROM table_supprimer WHERE champ IN (SELECT champ FROM table_reference INNER....)
-//
-//DELETE messages , usersmessages  FROM messages  INNER JOIN usersmessages  
-//WHERE messages.messageid= usersmessages.messageid and messages.messageid = '1'
 ?><!DOCTYPE html>
 <html lang="fr">
 <head>
