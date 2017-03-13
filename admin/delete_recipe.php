@@ -3,6 +3,8 @@ session_start();
 
 require_once '../inc/connect.php';
 
+require_once 'inc/verif_session.php';
+
 // Permet de vérifier que mon id est présent et de type numérique
 if(isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])){
 
@@ -36,14 +38,22 @@ if(isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])){
 ?><!DOCTYPE html>
 <html>
 	<head>
-		<?php include_once '../inc/head.php'; ?>
-		<link rel="stylesheet" href="../assets/css/style.css">
 		<meta charset="utf-8">
 		<title>Supprimer une recette</title>
+
+		<?php include '../inc/head.php'; ?>
+
+		<link rel="stylesheet" type="text/css" href="assets/css/styleAdmin.css">
+		
+		<!-- <link rel="stylesheet" href="../assets/css/style.css"> -->
+	
+
 	</head>
 	<body>
-		<main class="page">
-			<?php include_once '../inc/menu.php'; ?>
+
+		<?php include './inc/menu_admin.php'; ?>
+
+		<main class="page container">
 
 			<div id="content" class=" well container">
 				<section class="row">

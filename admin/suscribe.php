@@ -1,6 +1,7 @@
 <?php
-
 session_start();
+
+require_once 'inc/verif_session.php';
 require_once '../inc/connect.php';
 
 $sql = $bdd->prepare('SELECT * FROM role');
@@ -78,14 +79,21 @@ if(!empty($_POST))
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Inscription</title>
 	<meta charset="utf-8">
-	<?php include '../inc/head.php' ;?>
+
+	<title>Inscription</title>
+
+	<?php include '../inc/head.php'; ?>
+
+	<link rel="stylesheet" type="text/css" href="assets/css/styleAdmin.css">
+
+
 </head>
 <body>
+	<?php include './inc/menu_admin.php'; ?>
 	<main class="container">
 		<?php 
-				include '../inc/menu_admin.php';
+				// include '../inc/menu_admin.php';
 				if(isset($formError) && $formError)
 				{ 
 					echo '<p class="error">'.implode('<br>', $error).'</p>';

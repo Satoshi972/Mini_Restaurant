@@ -1,5 +1,7 @@
 <?php
 session_start();
+
+require_once 'inc/verif_session.php';
 require_once '../inc/connect.php';
 
 $maxSize = (1024 * 1000) * 2; // Taille maximum du fichier
@@ -12,82 +14,7 @@ $post = [];
 if(isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])) {
 
 	$idRecipe = (int) $_GET['id'];
-
-	// Soumission du formulaire
-	if(!empty($_POST)){
-
-		// équivalent au foreach de nettoyage
-		$post = array_map('trim', array_map('strip_tags', $_POST)); 
-
-		// si la valeur titre a moins de 5 ou plus de 50 caractères, alors "erreur"
-		if(strlen($post['title']) < 5 || strlen($post['title']) > 50){
-			$errors[] = 'Le titre doit contenir de 5 à 50 caractères';
-		}
-		// si la valeur recette a moins de 20 caractères, alors "erreur"
-		if(strlen($post['content']) < 20){
-			$errors[] = 'La recette doit contenir au moins 20 caractères';
-		}
-		// si le fichier image est défini et ne comporte pas d'erreur
-		if(isset($_FILES['picture']) && $_FILES['picture']['error'] === 0){
-
-			$finfo = new finfo();
-			$mimeType = $finfo->file($_FILES['picture']['tmp_name'], FILEINFO_MIME_TYPE);
-
-			// vérifications de contrôle de l'image
-			$extension = pathinfo($_FILES['picture']['name'], PATHINFO_EXTENSION);
-
-			if(in_array($mimeType, $mimeTypeAvailable)){
-				// si le fichier n'excède pas le poids maxi autorisé
-				if($_FILES['picture']['size'] <= $maxSize){
-
-					if(!is_dir($uploadDir)){
-						mkdir($uploadDir, 0755); //pour la compatibilité
-					} 
-					// on renomme le fichier
-					$newPictureName = uniqid('image_').'.'.$extension;
-
-					if(!move_uploaded_file($_FILES['picture']['tmp_name'], $uploadDir.$newPictureName)){
-						$errors[] = 'Erreur lors de l\'upload du fichier';
-					} 
-				}
-				else {
-					$errors[] = 'La taille du fichier excède 2 Mo';
-				}
-			}
-			else {
-				$errors[] = 'Le fichier n\'est pas une image valide';
-			}
-		}
-		else {
-			$errors[] = 'Aucune image sélectionnée';
-		}
-
-
-		if(count($errors) === 0) {
-
-			$update = $bdd->prepare('UPDATE recipe SET rcp_title = :rcp_title, rcp_content = :rcp_content, rcp_picture = :rcp_picture WHERE rcp_id = :idRecipe');
-
-			$update->bindValue(':idRecipe', $modif_recipe['rcp_id'], PDO::PARAM_INT);
-			$update->bindValue(':rcp_title', $post['title']);
-			$update->bindValue(':rcp_content', $post['content']);
-			$update->bindValue(':rcp_picture', $uploadDir.$newPictureName);
-
-			if($update->execute())
-			{
-				$success = 'Félicitations votre recette a été modifiée';
-
-			} else {
-				var_dump($update->errorInfo());
-				die;
-			}
-		} else {
-			$textErrors = implode('<br>', $errors);
-		}
-
-	}
-var_dump($modif_recipe);
-
-	// Jointure SQL permettant de récupérer la recette & le prénom & nom de l'utilisateur l'ayant publié
+	
 	$selectOne = $bdd->prepare('SELECT * FROM recipe WHERE rcp_id = :rcp_id');
 	$selectOne->bindValue(':rcp_id', $idRecipe, PDO::PARAM_INT);
 
@@ -100,22 +27,98 @@ var_dump($modif_recipe);
 		die; // alias de exit(); => die('Hello world');
 	}
 }
+// Soumission du formulaire
+if(!empty($_POST)){
 
+	// équivalent au foreach de nettoyage
+	$post = array_map('trim', array_map('strip_tags', $_POST)); 
+
+	// si la valeur titre a moins de 5 ou plus de 50 caractères, alors "erreur"
+	if(strlen($post['title']) < 5 || strlen($post['title']) > 50){
+		$errors[] = 'Le titre doit contenir de 5 à 50 caractères';
+	}
+	// si la valeur recette a moins de 20 caractères, alors "erreur"
+	if(strlen($post['content']) < 20){
+		$errors[] = 'La recette doit contenir au moins 20 caractères';
+	}
+	// si le fichier image est défini et ne comporte pas d'erreur
+	if(isset($_FILES['picture']) && $_FILES['picture']['error'] === 0){
+
+		$finfo = new finfo();
+		$mimeType = $finfo->file($_FILES['picture']['tmp_name'], FILEINFO_MIME_TYPE);
+
+		// vérifications de contrôle de l'image
+		$extension = pathinfo($_FILES['picture']['name'], PATHINFO_EXTENSION);
+
+		if(in_array($mimeType, $mimeTypeAvailable)){
+			// si le fichier n'excède pas le poids maxi autorisé
+			if($_FILES['picture']['size'] <= $maxSize){
+
+				if(!is_dir($uploadDir)){
+					mkdir($uploadDir, 0755); //pour la compatibilité
+				} 
+				// on renomme le fichier
+				$newPictureName = uniqid('image_').'.'.$extension;
+
+				if(!move_uploaded_file($_FILES['picture']['tmp_name'], $uploadDir.$newPictureName)){
+					$errors[] = 'Erreur lors de l\'upload du fichier';
+				} 
+			}
+			else {
+				$errors[] = 'La taille du fichier excède 2 Mo';
+			}
+		}
+		else {
+			$errors[] = 'Le fichier n\'est pas une image valide';
+		}
+	}
+	else {
+		$errors[] = 'Aucune image sélectionnée';
+	}
+
+
+	if(count($errors) === 0) {
+
+		$update = $bdd->prepare('UPDATE recipe SET rcp_title = :rcp_title, rcp_content = :rcp_content, rcp_picture = :rcp_picture WHERE rcp_id = :idRecipe');
+
+		$update->bindValue(':idRecipe', $modif_recipe['rcp_id'], PDO::PARAM_INT);
+		$update->bindValue(':rcp_title', $post['title']);
+		$update->bindValue(':rcp_content', $post['content']);
+		$update->bindValue(':rcp_picture', $uploadDir.$newPictureName);
+
+		if($update->execute())
+		{
+			$success = 'Félicitations votre recette a été modifiée';
+
+		} else {
+			var_dump($update->errorInfo());
+			die;
+		}
+	} else {
+		$textErrors = implode('<br>', $errors);
+	}
+
+}
 ?>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
-		<link rel="stylesheet" href="../assets/css/style.css">
-		<?php include '../inc/head.php';?>
 		<title>Modifier une recette</title>
+
+		<?php include '../inc/head.php'; ?>
+
+		<link rel="stylesheet" type="text/css" href="assets/css/styleAdmin.css">
+
+		<link rel="stylesheet" href="../assets/css/style.css">		
 
 	</head>
 	<body>
+		<?php include './inc/menu_admin.php'; ?>
 		<main class="page">
-			<?php include '../inc/menu_admin.php'; ?>
+			
 
-			<div id="content" class=" well container">
+			<div id="content" class="well container">
 				<section class="row">
 					<div class="contact col-xs-12">
 						<h3>Modifier une recette</h3>
@@ -137,11 +140,10 @@ var_dump($modif_recipe);
 
 							<div class="form-group">
 								<label for="content">Recette</label>
-									<div class="input-group">
-										<textarea style="width : 756px" class="form-control" rows="15" name="content" id="content"><?=$modif_recipe['rcp_content'];?></textarea>
-									</div>
+								<div class="input-group">
+									<textarea style="width : 756px" class="form-control" rows="15" name="content" id="content"><?=$modif_recipe['rcp_content'];?></textarea>
 								</div>
-						
+							</div>
 
 							<div class="form-group">
 								<label for="picture">Photo</label>
@@ -159,6 +161,6 @@ var_dump($modif_recipe);
 				</section>
 			</div>
 		</main>
-		<?php include '../inc/script.php' ?>
+		<?php include_once '../inc/script.php' ?>
 	</body>
 </html>
