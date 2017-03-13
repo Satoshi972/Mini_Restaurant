@@ -28,7 +28,7 @@ if(!empty($_POST))
 
 				if($nbretour == 2){
 					
-					$token = md5($info['usr_email']);
+					$token = md5($info['usr_email'].uniqid());
 
 					$insert= $bdd->prepare('INSERT INTO reset_password (psw_token, psw_usr_id) VALUES (:token, :userId) ');
 					$insert->bindValue(':token', $token);
@@ -46,11 +46,12 @@ if(!empty($_POST))
 							$siteAdd = $_SERVER['SERVER_NAME'];
 
 							// $data = "<a href='psw_recorver_update?token=.$token.'>Votre lien de récupération</a>";
-							$data = "<a href='http://localhost/WF3_PERDAF/GitubProject/Projet WF3/Mini_Restaurant/admin/psw_recorver_update.php?token=.$token.'>Changer votre mot de passe</a>";
+							$data = "<a href='http://localhost/WF3_PERDAF/GitubProject/Projet WF3/Mini_Restaurant/admin/psw_recorver_update.php?token=$token'>Changer votre mot de passe</a>";
 
 
 							mail($post['email'],'Réinitialisation de mot de passe', $data, $headers);
 
+							$success = 'Un lien de reinitialisation vous a été envoyer, verifier vous boite mail !<br> Vous pouvez fermer cette page !';
 							
 					}else
 					{
@@ -81,7 +82,7 @@ if(!empty($_POST))
 	<main class="container">
 
 		<div class="jumbotron">
-
+			<?php if(!isset($success)): ?>
 			<form method="post" class="formhorizontal">
 				<legend>Récupération de mot de passe</legend>
 
@@ -101,7 +102,12 @@ if(!empty($_POST))
 				<input type="submit" class="btn btn-primary">
 				</div>
 			</form>
-			
+			<?php else:
+
+				echo '<p class="text-info text-center">'.$success.'</p>';
+
+				endif;
+			?>
 		</div>
 	</main>
 	<?php require_once '../inc/script.php'; ?>

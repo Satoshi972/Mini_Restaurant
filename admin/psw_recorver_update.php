@@ -22,14 +22,19 @@ if(isset($_GET['token']) && !empty($_GET['token']))
 			}
 
 			if(!isset($error)){
+
 				$change_psw = $bdd->prepare('UPDATE users SET usr_password = :psw WHERE users.usr_id = :id_token');
 				
+				// $change_psw-> bindValue(':psw', $post['password']);
 				$change_psw-> bindValue(':psw', password_hash($post['password'],PASSWORD_DEFAULT));
 				$change_psw-> bindValue(':id_token', $infoToken['psw_usr_id']);
 
 				if($change_psw->execute()){
 					$del = $bdd->prepare('DELETE FROM reset_password WHERE psw_token = :token');
 					$del->bindValue('token', $_GET['token']);
+
+
+					header('location: loggin.php');
 
 					if(!$del->execute()){
 						die(var_dump($del->errorInfo()));
