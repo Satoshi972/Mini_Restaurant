@@ -6,6 +6,12 @@ require_once './inc/verif_session.php';
 require_once '../inc/connect.php';
 
 
+if(!isset($_SESSION['is_logged']) || empty($_SESSION['is_logged']))
+{
+	die(header("Location : loggin.php"));
+}
+
+
 $maxSize = (1024 * 1000) * 2; // Taille maximum du fichier
 $uploadDir = 'uploads/'; // Répertoire d'upload
 $mimeTypeAvailable = ['image/jpg', 'image/jpeg', 'image/pjpeg', 'image/png', 'image/gif'];
@@ -64,11 +70,16 @@ if(!empty($_POST)){
 
 	if(count($errors) === 0){
         // s'il n'y a pas d'erreur, on récupère les données de la table "recipe", titre, contenu et image et on leur affecte un nom
-		$request = $bdd->prepare('INSERT INTO recipe (rcp_title, rcp_content, rcp_picture) VALUES(:title, :content, :picture)');
+		$request = $bdd->prepare('INSERT INTO recipe (rcp_title, rcp_content, rcp_picture, rcp_usr_id) VALUES(:title, :content, :picture, :userId)');
         /* on affecte à chaque nom créé, la valeur récupérée dans les champs de la table de données et le chemin pour l'image... */
 		$request->bindValue(':title', $post['title']);
 		$request->bindValue(':content', $post['content']);
+<<<<<<< HEAD
+        $request->bindValue(':picture', $uploadDir.$newPictureName);
+        $request->bindValue(':userId', $_SESSION['id']);
+=======
     $request->bindValue(':picture', $uploadDir.$newPictureName);
+>>>>>>> dev
     
     if($request->execute()){
         $success = 'Bravo, la recette a bien été ajoutée';
