@@ -4,6 +4,6 @@
 		$prenomUser = $_SESSION['prenom'];
 		$roleUser = $_SESSION['role'];
 	}else{
-		header('location: ./../loggin.php');
+		header('location: loggin.php');
 	}
 ?>
