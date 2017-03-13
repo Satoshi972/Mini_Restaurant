@@ -1,11 +1,16 @@
 <?php
 session_start(); // Permet de démarrer la session
+
+require_once './inc/verif_session.php';
+
 require_once '../inc/connect.php';
+
 
 if(!isset($_SESSION['is_logged']) || empty($_SESSION['is_logged']))
 {
 	die(header("Location : loggin.php"));
 }
+
 
 $maxSize = (1024 * 1000) * 2; // Taille maximum du fichier
 $uploadDir = 'uploads/'; // Répertoire d'upload
@@ -43,13 +48,13 @@ if(!empty($_POST)){
 
 				if(!is_dir($uploadDir)){
 					mkdir($uploadDir, 0755); //pour la compatibilité
-				}
+				} 
                 // on renomme le fichier
-				$newPictureName = uniqid('image').'.'.$extension;
+				$newPictureName = uniqid('image_').'.'.$extension;
 
 				if(!move_uploaded_file($_FILES['picture']['tmp_name'], $uploadDir.$newPictureName)){
 					$errors[] = 'Erreur lors de l\'upload du fichier';
-				}
+				} 
 			}
 			else {
 				$errors[] = 'La taille du fichier excède 2 Mo';
@@ -69,8 +74,12 @@ if(!empty($_POST)){
         /* on affecte à chaque nom créé, la valeur récupérée dans les champs de la table de données et le chemin pour l'image... */
 		$request->bindValue(':title', $post['title']);
 		$request->bindValue(':content', $post['content']);
+<<<<<<< HEAD
         $request->bindValue(':picture', $uploadDir.$newPictureName);
         $request->bindValue(':userId', $_SESSION['id']);
+=======
+    $request->bindValue(':picture', $uploadDir.$newPictureName);
+>>>>>>> dev
     
     if($request->execute()){
         $success = 'Bravo, la recette a bien été ajoutée';
@@ -91,14 +100,19 @@ if(!empty($_POST)){
 ?><!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-	<?php include '../inc/head.php';?>
-<title>Ajouter une recette</title>
+	<meta charset="utf-8">
+	<title>Ajouter une recette</title>
+	
+	<?php include '../inc/head.php'; ?>
+
+	<link rel="stylesheet" type="text/css" href="assets/css/styleAdmin.css">
 
 </head>
 <body>
+
+	<?php include './inc/menu_admin.php'; ?>
+
    	<main class="container">
-	<?php include '../inc/menu_admin.php'; ?>
    
     <div class="jumbotron">
 	<h3>Ajouter une recette</h3>
@@ -121,7 +135,7 @@ if(!empty($_POST)){
         
         <div class="form-group">
 		<label for="content">Recette</label>
-		<textarea class="form-control" name="content" id="content"></textarea>
+		<textarea class="form-control" rows="6" name="content" id="content"></textarea>
         </div>
 		
 		<div class="form-group">
@@ -136,6 +150,6 @@ if(!empty($_POST)){
 	<?php endif; ?>
     </div>
 
-    <?php include '../inc/script.php' ?>
+    <?php include_once '../inc/script.php' ?>
 </body>
 </html>

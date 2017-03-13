@@ -1,11 +1,13 @@
 <?php
 session_start();
 
+require_once 'inc/verif_session.php';
+
 if(isset($_GET['loggout']) && ($_GET['loggout'] == 'yes'))
 {
 	unset($_SESSION['nom'], $_SESSION['prenom'], $_SESSION['email'], $_SESSION['role']); 
 	session_destroy();
-	header('Location: loggin.php');
+	header('Location: ./loggin.php');
 	die();
 }
 
@@ -13,16 +15,19 @@ if(isset($_GET['loggout']) && ($_GET['loggout'] == 'yes'))
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Déconnexion</title>
 	<meta charset="utf-8">
+	<title>Déconnexion</title>
+
 	<?php include '../inc/head.php'; ?>
+
+	<link rel="stylesheet" type="text/css" href="assets/css/styleAdmin.css">
+
 </head>
 <body>
 
-	<main class="container">
-		<?php 
-		include '../inc/menu_admin.php';
-		?>
+	<?php include './inc/menu_admin.php'; ?>
+		<main class="container">
+
 		<div class="jumbotron">
 			<?php 
 
@@ -35,7 +40,7 @@ if(isset($_GET['loggout']) && ($_GET['loggout'] == 'yes'))
 					
 						<br><br>
 
-						<a href="log_out.php?loggout=yes">Oui, je veux me déconnecter</a>
+						<a href="loggout.php?loggout=yes">Oui, je veux me déconnecter</a>
 					</p>
 
 				<?php else: ?>
