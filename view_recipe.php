@@ -49,7 +49,7 @@ $words = array ('de', 'du', 'des', 'le', 'la', 'les'); //Définition des pronoms
 
 				<p class="list"><?php echo nl2br($added_recipe['rcp_content']); ?></p>
 				<!-- on affiche l'image récupérée dans notre tableau added_recipe avec les données récupérées dans la table, à défaut on affiche le nom de la rectte récupérée dans la table -->
-				<img src="<?=$added_recipe['rcp_picture'];?>" alt="<?php echo $added_recipe['rcp_title'];?>">
+				<img src="./admin/<?=$added_recipe['rcp_picture'];?>" alt="<?php echo $added_recipe['rcp_title'];?>">
 
 				<p class="list">Publié par <?php echo $added_recipe['usr_firstname'].' '.$added_recipe['usr_lastname'];?></p>
 				<?php else: ?>
