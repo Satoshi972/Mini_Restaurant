@@ -67,10 +67,7 @@ else
 			</div>
 
 		</main>
-		<footer>
-			<h3>Plan du Site</h3>
-			
-		</footer>
+		<?php require_once 'inc/footer.php'; ?>
 
 		<?php require_once 'inc/script.php'; ?>
 
