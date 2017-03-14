@@ -58,7 +58,7 @@ if(isset($_GET['search']) && !empty($_GET['search'])){
 </head>
 <body>
 	<?php require_once 'inc/navFront.php'; ?>
-	<div class="container">
+	<div class="container listerecette">
 		<form  method="GET" class="form-horizontal" role="form">
 				<div class="form-group">
 					<legend>Recherche</legend>

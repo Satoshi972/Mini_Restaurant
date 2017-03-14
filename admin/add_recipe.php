@@ -25,11 +25,17 @@ if(!empty($_POST)){
 		$post[$key] = trim(strip_tags($value));
 	}
 	// si la valeur titre a moins de 5 ou plus de 50 caractères, alors "erreur"
-	if(!preg_match('#^[a-z0-9._-]{5,140}$#', $post['title'])){
+	// if(!preg_match('#^[a-z0-9._-]{5,140}$#', $post['title'])){
+	// 	$errors[] = 'Le titre doit contenir de 5 à 50 caractères';
+	// }
+	if(strlen($post['title']) < 5){
 		$errors[] = 'Le titre doit contenir de 5 à 50 caractères';
 	}
 	// si la valeur recette a moins de 20 caractères, alors "erreur"
-	if(!preg_match('#^[a-z0-9._-]{20,}$#', $post['content'])){
+	// if(!preg_match('#^[a-z0-9._-\s]{20,}$#', $post['content'])){
+	// 	$errors[] = 'La recette doit contenir au moins 20 caractères';
+	// }
+	if(strlen($post['content']) < 20){
 		$errors[] = 'La recette doit contenir au moins 20 caractères';
 	}
 	// si le fichier image est défini et ne comporte pas d'erreur

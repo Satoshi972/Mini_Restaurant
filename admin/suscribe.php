@@ -65,7 +65,7 @@ if(!empty($_POST))
 		if($req->execute())
 		{
 			$createSuccess = true;
-			header('Location: loggin.php'); // On redirige vers la page de connexion
+			header('Location: list_users.php'); // On redirige vers la page de connexion
 			die();
 		}
 		else

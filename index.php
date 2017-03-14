@@ -46,7 +46,7 @@ else
 			<div class="well container">								
 				<div class="row col-xs-12">
 					<section id="section2">
-						<legend class="address"><strong>Faites votre choix</strong></legend>				
+						<legend class="address text-center"><strong>Les Recettes des Chefs</strong></legend>				
 						<?php 
 						foreach ($recipe as $key => $value) :
 						?>
