@@ -150,12 +150,12 @@ if(!empty($_POST)) { // si le tableau n'est pas vide alors on fait une boucle qu
 					</fieldset>
 				</form>
 			</div><!-- /.container -->
-			
-			<?php include_once 'inc/script.php'; ?>
-			
-		
-		</main>
-		<?php require_once 'inc/footer.php'; ?>
 
-			</body>
-			</html>
+			<?php include_once 'inc/script.php'; ?>
+
+
+		</main>
+		<?php include_once 'inc/footer.php'; ?>
+
+	</body>
+</html>
