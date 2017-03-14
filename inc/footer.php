@@ -3,18 +3,18 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<div class="col-md-6">
-				
 					<ul>
-						<li> <a href="index.php"> Acceuil </a> </li>
+						<li> <a href="index.php"> Accueil </a> </li>
 						<li> <a href="contact.php"> Nous contacter </a> </li>
-						<li> <a href="about.php"> A propos </a> </li>
-						<li> <a href="search.php"> Rechercher une recette </a> </li>
 					</ul>
 				</div>
 
 
 				<div class="col-md-6">
-					
+				    <ul>
+					    <li> <a href="about.php"> A propos </a> </li>
+						<li> <a href="search.php"> Rechercher une recette </a> </li>
+                    </ul>
 				</div>
 			</div>
 			<!--/.row--> 
@@ -22,7 +22,7 @@
 		<!--/.footer-bottom-->
 		<div class="row">
 			<div class="col-xs-12">
-				<p class="pull-left"> Copyright © WF3 2017. All right reserved. </p>
+				<p class="copyr">Copyright © WF3 ORSS 2017. All rights reserved.</p>
 			</div>
 		</div>
 		<!--/.container--> 

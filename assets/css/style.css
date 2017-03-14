@@ -123,3 +123,19 @@ footer {
 	position: absolute;
 	bottom: -130px;
 }
+
+.foot li a {
+    font-family: 'roboto', sans-serif;
+    color: rgb(189,8,48);
+}
+
+.foot ul{
+    text-decoration: none;
+    list-style: none;
+    margin-top: 16px;
+    font-size: 16px;
+}
+.copyr{
+    text-align: center;
+    margin-top: 12px;
+}
