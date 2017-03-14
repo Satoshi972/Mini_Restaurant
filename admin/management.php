@@ -92,7 +92,7 @@ if(!empty($_POST))
 
 		if($update->execute())
 		{
-			refresh();
+			//refresh();
 			//$success = 'Modification efféctée';
 		}
 		else
