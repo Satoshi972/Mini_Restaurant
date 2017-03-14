@@ -2,9 +2,9 @@
 require_once 'inc/connect.php';
 
 
-	$select = $bdd->prepare('SELECT * FROM site_info');
+	$select = $bdd->prepare('SELECT * FROM site_info ORDER BY  inf_id DESC LIMIT 1');
 	if($select->execute()){
-		$restaurant = $select->fetch(PDO::FETCH_ASSOC);
+		$info = $select->fetch(PDO::FETCH_ASSOC);
 	}
 	else {
 		var_dump($select->errorInfo());
@@ -22,18 +22,16 @@ require_once 'inc/connect.php';
 	<body>
 		<main class="page">
 
-			<?php include_once 'inc/menu.php'; ?>
+			<?php require_once 'inc/navFront.php'; ?>
 
 			<div id="content" class="well container">
 				<div class="row">
 					<div class="col-xs-12">
-
-						<?php if(isset($restaurant) && !empty($restaurant)) : ?>	
-
+	
 						<div class="col-xs-6">
 							<div class="media">
 								<div class="media-left">
-									<img  src="<?=$restaurant['inf_picture']; ?>" class="media-object" style="width:500px;height:150px">
+									<img  src="<?=$info['inf_picture']; ?>" class="img-responsive img-thumbnail">
 								</div>
 							</div>
 						</div>
@@ -41,8 +39,8 @@ require_once 'inc/connect.php';
 						<div class="col-xs-6">
 							<div class="media-body">
 								<h4 class="media-heading list nameForm">Qui sommes nous !!!</h4>
-								<h2 class="list"><?=$restaurant['inf_name'];?></h2>
-								<p class="list"><?=$restaurant["inf_content"]; ?></p>
+								<h2 class="list"><?=$info['inf_name'];?></h2>
+								<p class="list"><?=$info["inf_content"]; ?></p>
 							</div>
 						</div>
 
@@ -51,18 +49,17 @@ require_once 'inc/connect.php';
 							<div class="col-xs-12">
 
 								<div class="col-xs-6">
-									<p class="list"><?='Adresse : ' .$restaurant["inf_address"]; ?></p>
+									<p class="list"><?='Adresse : ' .$info["inf_address"]; ?></p>
 								</div>
 
 								<div class="col-xs-6">
-									<p class="list"><?='Tel :' .$restaurant["inf_phone"]; ?></p>
+									<p class="list"><?='Tel :' .$info["inf_phone"]; ?></p>
 								</div>
 
 							</div>
 						</div>
 					</div>
-				</div>
-				<?php endif; ?>                                       
+				</div>                                      
 			</div>
 			<?php include_once 'inc/script.php'; ?>
 		</main>

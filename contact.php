@@ -1,10 +1,19 @@
 <?php
-session_start();
 require_once 'inc/connect.php';
 
 //- Definitions des variables
 $user   = [];
 $errors = [];
+
+$site_info = $bdd->prepare('SELECT * FROM site_info ORDER BY inf_id DESC LIMIT 3');
+if($site_info->execute())
+{
+	$info = $site_info->fetch(PDO::FETCH_ASSOC);
+}
+else
+{
+	die(var_dump($site_info->errorInfo()));
+}
 
 
 if(!empty($_POST)) { // si le tableau n'est pas vide alors on fait une boucle qui verifie les valeurs de chaque input, récupere pour chaque clé sa valeur et regarde si il n'y a pas d'espaces avant et apres
@@ -50,14 +59,17 @@ if(!empty($_POST)) { // si le tableau n'est pas vide alors on fait une boucle qu
 ?><!DOCTYPE html>
 <html lang="fr">
 	<head>
-		<?php include_once 'inc/head.php'; ?>
 		<meta charset="UTF-8">
 		<title>Contact</title>
-	</head>
-	<body>
-		<main class="page">
 
-			<?php include_once 'inc/menu.php'; ?>
+		<?php include_once 'inc/head.php'; ?>
+
+	</head>
+
+	<body>
+
+		<?php require_once 'inc/navFront.php'; ?>
+		<main class="page">
 
 			<div id="content" class="container">
 				<?php

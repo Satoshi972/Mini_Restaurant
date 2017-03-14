@@ -1,6 +1,16 @@
 <?php
 session_start();
 
+require_once 'inc/connect.php';
+
+$site_info = $bdd->prepare('SELECT * FROM site_info ORDER BY inf_id DESC LIMIT 3');
+if($site_info->execute()){
+	$info = $site_info->fetch(PDO::FETCH_ASSOC);
+}
+else{
+	die(var_dump($site_info->errorInfo()));
+}
+
 /**
 *
 *
@@ -10,8 +20,6 @@ session_start();
 function hightlight($pattern, $string){
 	return preg_replace( '/('.$pattern.')/i', '<span style="font-weight: bold; color: red;">$1</span>', $string); 
 }
-
-require_once './inc/connect.php';
 
 if(isset($_GET['search']) && !empty($_GET['search'])){
 
@@ -29,6 +37,7 @@ if(isset($_GET['search']) && !empty($_GET['search'])){
 		die(var_dump($select->errorInfo()));
 	}
 
+		var_dump($search);
 }else{
 	$select = $bdd->prepare('SELECT * FROM recipe');
 	if($select->execute()){
@@ -42,11 +51,11 @@ if(isset($_GET['search']) && !empty($_GET['search'])){
 	<meta charset="UTF-8">
 	<title>Recherche</title>
 
-	<?php require_once './inc/head.php'; ?>
+	<?php require_once 'inc/head.php'; ?>
 
 </head>
 <body>
-	
+	<?php require_once 'inc/navFront.php'; ?>
 	<div class="container">
 		<form  method="GET" class="form-horizontal" role="form">
 				<div class="form-group">
