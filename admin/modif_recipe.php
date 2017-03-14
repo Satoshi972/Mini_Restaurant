@@ -144,9 +144,9 @@ if(!empty($_POST)){
 							<div class="form-group">
 
 								<label for="content">Recette</label>
-								<div class="input-group">
+								
 									<textarea class="form-control" rows="10" cols="30" name="content" id="textcontent"><?=$modif_recipe['rcp_content'];?></textarea>
-								</div>
+								
 
 							</div>
 

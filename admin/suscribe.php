@@ -21,35 +21,34 @@ $post = array();
 
 if(!empty($_POST))
 {
-	foreach($_POST as $key => $value)
+	
+	$post= array_map('trim', array_map('strip_tags', $_POST));
+
+	if(!preg_match('#^[a-z0-9._-]{3,}$#', $post['firstname']))
 	{
-		$post[$key] = trim(strip_tags($value));
+		$error[] = 'Le prénom doit faire au moins 3 caractères';
 	}
 
-	if(strlen($post['firstname']) < 3)
+	if(!preg_match('#^[a-z0-9._-]{3,}$#', $post['lastname']))
 	{
-		$error[] = 'Le prénom doit contenir au moins 3 caractères';
+		$error[] = 'Le nom doit faire au moins 3 caractères';
 	}
 
-	if(strlen($post['lastname']) < 3)
-	{
-		$error[] = 'Le nom doit contenir au moins 3 caractères';
-	}
-
-	if(!filter_var($post['email'], FILTER_VALIDATE_EMAIL))
+	if(!preg_match('#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#', $post['email'])) 
 	{
 		$error[] = 'L\'adresse email est invalide';
 	}
 
-	if(strlen($post['password']) < 8 || strlen($post['password']) > 20)
+	if(!preg_match('#^[a-z0-9._-]{8,20}$#', $post['password'])) 
 	{
-		$error[] = 'Le mot de passe doit contenir entre 8 et 20 caractères';
+		$error[] = 'Le mot de passe doit comporter entre 8 et 20 caractères maximum';
 	}
 
 	if(!is_numeric($post['role']))
 	{
-		$error[] = 'Erreur lors du choix du rôle';
+		$error[] = 'Erreur lors du choix du role';
 	}
+
 
 	if(count($error) > 0)
 	{		
