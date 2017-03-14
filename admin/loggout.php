@@ -35,8 +35,8 @@ if(isset($_GET['loggout']) && ($_GET['loggout'] == 'yes'))
 					<p style="text-align:center;">
 						<?php echo $_SESSION['prenom']; ?>, voulez-vous vous déconnecter ? Vraiment ?
 
-						<br><br>
-						<img src="http://ronron.e-monsite.com/medias/images/chaton-triste.jpg" style="height:200px;border-radius:10px;">
+						<br><!-- <br>
+						<img src="http://ronron.e-monsite.com/medias/images/chaton-triste.jpg" style="height:200px;border-radius:10px;"> -->
 					
 						<br><br>
 

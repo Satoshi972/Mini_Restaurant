@@ -30,7 +30,7 @@ if(!empty($_POST)) { // si le tableau n'est pas vide alors on fait une boucle qu
 	if(!preg_match('#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#', $user['email'])){
 		$errors[] = "<p>Votre EMAIL est invalide !!!</p><br>";         
 	}
-	if(!preg_match('#^[a-z0-9._-]{10,}$#',$user["comment"])) {
+	if(strlen($user["comment"]) < 10) {
 		$errors[] = "<p>Votre message doit être complété</p><br>";
 	}
 

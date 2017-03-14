@@ -4,7 +4,7 @@ session_start(); // Permet de démarrer la session
 require_once 'inc/verif_session.php';
 require_once '../inc/connect.php';
 
-$list_contact = $bdd->prepare('SELECT * FROM contacts ORDER BY cts_id DESC');
+$list_contact = $bdd->prepare('SELECT * FROM contacts ORDER BY cts_id DESC WHERE cts_statuts = 0');
 if($list_contact->execute())
 {
 	$contacts =  $list_contact->fetchAll(PDO::FETCH_ASSOC);
