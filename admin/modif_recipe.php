@@ -26,6 +26,8 @@ if(isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])) {
 		var_dump($selectOne->errorInfo());
 		die; // alias de exit(); => die('Hello world');
 	}
+}else{
+	header('location: list_recipes.php');
 }
 // Soumission du formulaire
 if(!empty($_POST)){
@@ -108,16 +110,16 @@ if(!empty($_POST)){
 
 		<?php include '../inc/head.php'; ?>
 
+		<link rel="stylesheet" href="../assets/css/style.css">		
 		<link rel="stylesheet" type="text/css" href="assets/css/styleAdmin.css">
 
-		<link rel="stylesheet" href="../assets/css/style.css">		
 
 	</head>
 	<body>
 		<?php include './inc/menu_admin.php'; ?>
 		<main class="page">
 
-			<div id="content" class="well container">
+			<div id="content" class="container">
 				<section class="row">
 					<div class="contact col-xs-12">
 						<h3 class="titlemodif">Modifier une recette</h3>
@@ -131,31 +133,27 @@ if(!empty($_POST)){
 						<p class="alert alert-success" role="alert"><?php echo $success; ?></p>
 						<?php endif; ?>
 
-						<form method="post" enctype="multipart/form-data">
+						<form method="post" enctype="multipart/form-data" class="form-horizontal">
 							<div class="form-group">
 								<label for="title">Nom de la recette</label>
 								<input class="form-control" type="text" name="title" id="title" value="<?=$modif_recipe['rcp_title'];?>">
 							</div>
 							</section>
 
-						<section class="row col-xs-12">
 
 							<div class="form-group">
 
 								<label for="content">Recette</label>
 								<div class="input-group">
-									<textarea class="form-control" rows="15" name="content" id="textcontent"><?=$modif_recipe['rcp_content'];?></textarea>
+									<textarea class="form-control" rows="10" cols="30" name="content" id="textcontent"><?=$modif_recipe['rcp_content'];?></textarea>
 								</div>
 
 							</div>
-						</section>
-						<section class="row col-xs-12">
 
 							<div class="form-group">
 								<label for="picture">Photo</label>
 								<input class="form control" type="file" name="picture" id="picture" accept="image/*" value="<?=$modif_recipe['rcp_picture'];?>">
 							</div>
-						</section>
 
 						<div class="text-center">
 							<input class="btn btn-primary" type="submit" value="Mettre a jour la recette">

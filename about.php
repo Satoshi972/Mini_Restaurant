@@ -31,7 +31,7 @@ require_once 'inc/connect.php';
 						<div class="col-xs-6">
 							<div class="media">
 								<div class="media-left">
-									<img  src="<?=$info['inf_picture']; ?>" class="img-responsive img-thumbnail">
+									<img  src="./admin/<?=$info['inf_picture']; ?>" class="img-responsive img-thumbnail">
 								</div>
 							</div>
 						</div>

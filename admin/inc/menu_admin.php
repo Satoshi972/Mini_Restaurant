@@ -1,4 +1,4 @@
-	<div class="container-fluid">
+<div class="container-fluid">
 		<div class="topinfo">
 				<?php if($roleUser == 'admin'): ?>
 						<h4>ADMINISTRATEUR</h4>
@@ -8,7 +8,7 @@
 			<div class="container">
 					<div class="inforight">
 						<h5>Bonjour <?=$nomUser.' '.$prenomUser?> / </h5>
-						<a href="./loggout.php">Vous Déconnecter</a>
+						<a href="./loggout.php">Vous Deconnecter</a>
 					</div>
 			</div>
 		</div>
@@ -18,15 +18,14 @@
 				<div class="navside">
 					<ul>
 						<div class="titreMenu">Gestion du Site</div>
-						<li><a href="#">Coordonnées</a></li>
-						<li><a href="#">Photo de couverture</a></li>
+						<li><a href="management.php">Management</a></li>
 					</ul>	
 				</div>
 				<div class="navside">
 					<ul>
 						<div class="titreMenu">Gestion des recettes</div>
-						<li><a href="search.php">Liste des recettes</a></li>
-						<li><a href="modif_recipe.php">Modifier une recette</a></li>
+						<li><a href="list_recipes.php">Liste des recettes</a></li>
+						<li><a href="modif_recipe.php">Modifer une recette</a></li>
 						<li><a href="delete_recipe.php">Supprimer une recette</a></li>
 						<li><a href="add_recipe.php">Ajouter une recette</a></li>
 					</ul>	
@@ -34,15 +33,15 @@
 				<div class="navside">
 					<ul>
 						<div class="titreMenu">Gestion des Contacts</div>
-						<li><a href="list_contact.php">Liste des fiches de contacts</a></li>
+						<li><a href="list_contact.php">Liste fiches contacts</a></li>
 
 					</ul>	
 				</div>
 				<div class="navside">
 					<ul>
 						<div class="titreMenu">Gestion des Utilisateurs</div>
-						<li><a href="suscribe.php">Créer un Utilisateur</a></li>
-						<li><a href="delete_user">Suppression d'un Utilisateur</a></li>
+						<li><a href="suscribe.php">Creer un Utilisateur</a></li>
+						<li><a href="list_users.php">Suppression utilisateur</a></li>
 
 					</ul>	
 				</div>
@@ -51,8 +50,8 @@
 				<div class="navside">
 					<ul>
 						<div class="titreMenu">Gestion des recettes</div>
-						<li><a href="search.php">Liste des recettes</a></li>
-						<li><a href="modif_recipe.php">Modifier une recette</a></li>
+						<li><a href="list_recipes.php">Liste des recettes</a></li>
+						<li><a href="modif_recipe.php">Modifer une recette</a></li>
 						<li><a href="delete_recipe.php">Supprimer une recette</a></li>
 						<li><a href="add_recipe.php">Ajouter une recette</a></li>
 					</ul>	

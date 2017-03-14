@@ -32,6 +32,8 @@ if(isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])){
 			}
 		}
 	}
+}else{
+	header('location: list_recipes.php');
 }
 
 

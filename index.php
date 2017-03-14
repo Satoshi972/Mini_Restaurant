@@ -38,7 +38,7 @@ else
 
 			<div class="container-full">
 				<section id="section1">
-					<img class="projector" src="<?php echo $info['inf_picture']; ?>" alt="Header restaurant">
+					<img class="projector" src="./admin/<?php echo $info['inf_picture']; ?>" alt="Header restaurant">
 				</section>
 					
 			</div>
@@ -59,7 +59,7 @@ else
 						?>
 						<div class="row col-xs-12 myrow">
 							<div class="text-center">
-								<a href="list_recipes.php" class="front btn btn-info">Découvrir toutes les recettes des chefs</a>
+								<a href="search.php" class="front btn btn-info">Découvrir toutes les recettes des chefs</a>
 							</div>
 						</div>
 					</section>
