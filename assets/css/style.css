@@ -118,7 +118,7 @@ a.front{
 
 footer {
 	width: 100%;
-	height: 120px;
+	height: auto;
 	background-color: rgba(189,8,48,0.3);
 	position: absolute;
 	bottom: -130px;
@@ -126,14 +126,13 @@ footer {
 
 .foot li a {
     font-family: 'roboto', sans-serif;
-    color: rgb(189,8,48);
+    color: #2e2c2c;
 }
 
 .foot ul{
-    text-decoration: none;
     list-style: none;
     margin-top: 16px;
-    font-size: 16px;
+    font-size: 18px;
 }
 .copyr{
     text-align: center;
