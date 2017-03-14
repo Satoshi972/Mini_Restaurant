@@ -1,11 +1,8 @@
 <?php
 require_once 'inc/connect.php';
 
-if(isset($_GET['id']) && !empty($_GET['id'])){
-	$idRecipe = (int) $_GET['id'];
 
-	$select = $bdd->prepare('SELECT * FROM site_info WHERE inf_id = :inf_id');
-	$select->bindValue(':inf_id', $idRecipe, PDO::PARAM_INT);
+	$select = $bdd->prepare('SELECT * FROM site_info');
 	if($select->execute()){
 		$restaurant = $select->fetch(PDO::FETCH_ASSOC);
 	}
@@ -13,7 +10,6 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
 		var_dump($select->errorInfo());
 		die;
 	}
-}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
