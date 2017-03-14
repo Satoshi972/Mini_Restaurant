@@ -98,6 +98,8 @@ if(isset($_GET['search']) && !empty($_GET['search'])){
 			<?php if(isset($resSearch)): 
 
 					foreach ($resSearch as $key): ?>
+					<table>
+					<tbody>
 						<tr>
 							<td><?= hightlight($search, $key['rcp_title']); ?></td>
 							<td><?= hightlight($search, $key['rcp_content']); ?></td>
@@ -113,7 +115,8 @@ if(isset($_GET['search']) && !empty($_GET['search'])){
 				<h3><?=$error?></h3>
 			</div>
 		<?php endif; ?>
-
+		
 	</div>
+	<?php require_once 'inc/footer.php'; ?>
 </body>
 </html>

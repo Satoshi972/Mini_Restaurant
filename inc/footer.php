@@ -22,7 +22,7 @@
 		<!--/.footer-bottom-->
 		<div class="row">
 			<div class="col-xs-12">
-				<p class="pull-left"> Copyright © Footer 2014. All right reserved. </p>
+				<p class="pull-left"> Copyright © WF3 2017. All right reserved. </p>
 			</div>
 		</div>
 		<!--/.container--> 

@@ -63,5 +63,7 @@ require_once 'inc/connect.php';
 			</div>
 			<?php include_once 'inc/script.php'; ?>
 		</main>
+		<?php require_once 'inc/footer.php'; ?>
+
 	</body>
 </html>
