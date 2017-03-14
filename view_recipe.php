@@ -53,7 +53,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
 				<h2 class="list text-center"><?php echo $added_recipe['rcp_title'];?></h2>
 				<div class="row">
 					<div class="col-xs-6 text-center">
-						<img src="<?=$added_recipe['rcp_picture'];?>" alt="<?php echo $added_recipe['rcp_title'];?>">
+						<img src="<?=$added_recipe['rcp_picture'];?>" alt="<?php echo $added_recipe['rcp_title'];?>" class="thumbnail img-responsive" >
 					</div>
 					<div class="col-xs-6">
 						<p class="list"><?php echo nl2br($added_recipe['rcp_content']); ?></p>
