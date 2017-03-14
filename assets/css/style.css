@@ -7,7 +7,8 @@
 	background: rgba(189,8,48,1);
 	margin-top: 0px;
 	margin-bottom: 0px;
-	height: 110px;
+	height:129px;
+	padding: 15px;
 }
 
 .index-projector
@@ -32,7 +33,7 @@
 	background-size:cover;
 }
 #content {
-	width: 800px;
+	padding: 20px;
 }
 .nameForm {
 	color: white;
@@ -41,7 +42,8 @@ label {
 	color: white;
 }
 .well {
-	background-color: rgba(51, 51, 51, 0.6);
+	background-color: rgba(51, 51, 51, 0.8);
+	width: 800px;
 }
 
 .list {
@@ -49,16 +51,10 @@ label {
 }
 
 
-/*****************************************FOOTER**************************************/
-
-
-
-
-
 
 #section1 {
 	width: 100%;
-	height: 200px;
+	height: 100px	;
 	
 }
 
@@ -77,19 +73,21 @@ a {
 	font-family: 'Roboto',sans-serif;
 	font-size: 18px;
 	color: white;
-	margin-bottom: -5px;
+
+	
 }
 
 .projector {
 	background-size: cover;
 	width: 100%;
 	height:100vh;
-	opacity: 0.8;	
+	opacity: 0.5;	
 }
 
 .imgrecipe {
 	width: 340px;
 	height: 255px;
+	
 }
 
 .footer {
@@ -105,4 +103,24 @@ a {
 
 .index-main {
 	height: auto;
+}
+
+#textcontent {
+	width: 758px;
+}
+
+.titlemodif {
+	color: white;
+}
+
+button {
+	color: black;
+}
+
+footer {
+	width: 100%;
+	height: 50px;
+	background-color:black;
+	position: absolute;
+	bottom: -146px;
 }

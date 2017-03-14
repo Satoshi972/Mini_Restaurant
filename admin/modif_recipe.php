@@ -14,7 +14,7 @@ $post = [];
 if(isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id'])) {
 
 	$idRecipe = (int) $_GET['id'];
-	
+
 	$selectOne = $bdd->prepare('SELECT * FROM recipe WHERE rcp_id = :rcp_id');
 	$selectOne->bindValue(':rcp_id', $idRecipe, PDO::PARAM_INT);
 
@@ -116,12 +116,11 @@ if(!empty($_POST)){
 	<body>
 		<?php include './inc/menu_admin.php'; ?>
 		<main class="page">
-			
 
 			<div id="content" class="well container">
 				<section class="row">
 					<div class="contact col-xs-12">
-						<h3>Modifier une recette</h3>
+						<h3 class="titlemodif">Modifier une recette</h3>
 						<?php if(isset($modif_recipe) && !empty($modif_recipe)): ?>
 						<!-- on affiche une message en cas d'erreur en rouge, sinon un message de succès en vert -->
 						<?php if(isset($errorsText)): ?>
@@ -137,28 +136,35 @@ if(!empty($_POST)){
 								<label for="title">Nom de la recette</label>
 								<input class="form-control" type="text" name="title" id="title" value="<?=$modif_recipe['rcp_title'];?>">
 							</div>
+							</section>
+
+						<section class="row col-xs-12">
 
 							<div class="form-group">
+
 								<label for="content">Recette</label>
 								<div class="input-group">
-									<textarea style="width : 756px" class="form-control" rows="15" name="content" id="content"><?=$modif_recipe['rcp_content'];?></textarea>
+									<textarea class="form-control" rows="15" name="content" id="textcontent"><?=$modif_recipe['rcp_content'];?></textarea>
 								</div>
+
 							</div>
+						</section>
+						<section class="row col-xs-12">
 
 							<div class="form-group">
 								<label for="picture">Photo</label>
 								<input class="form control" type="file" name="picture" id="picture" accept="image/*" value="<?=$modif_recipe['rcp_picture'];?>">
 							</div>
+						</section>
 
-							<div class="text-center">
-								<input class="btn btn-primary" type="submit" value="Mettre a jour la recette">
-							</div>
+						<div class="text-center">
+							<input class="btn btn-primary" type="submit" value="Mettre a jour la recette">
+						</div>
 						</form>
-						<?php else: ?>
-						<p class="alert alert-danger" role="alert">Désolé, aucune recette correspondante !!!</p>
-						<?php endif; ?>
+					<?php else: ?>
+					<p class="alert alert-danger" role="alert">Désolé, aucune recette correspondante !!!</p>
+					<?php endif; ?>
 					</div>
-				</section>
 			</div>
 		</main>
 		<?php include_once '../inc/script.php' ?>
