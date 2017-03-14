@@ -21,13 +21,16 @@ function hightlight($pattern, $string){
 	return preg_replace( '/('.$pattern.')/i', '<span style="font-weight: bold; color: red;">$1</span>', $string); 
 }
 
+
+
 if(isset($_GET['search']) && !empty($_GET['search'])){
 
 	$search = strval($_GET['search']);
 
 	$select = $bdd->prepare('SELECT rcp_title, rcp_content, rcp_id FROM recipe WHERE rcp_title LIKE :search OR rcp_content LIKE :search');
 
-	if($select->execute(array(':search' => $search.'%'))){
+	$select->bindValue(':search', '%'.$search.'%');
+	if($select->execute()){
 
 		$resSearch = $select->fetchAll(PDO::FETCH_ASSOC);
 		if(count($resSearch) == 0){
@@ -37,7 +40,6 @@ if(isset($_GET['search']) && !empty($_GET['search'])){
 		die(var_dump($select->errorInfo()));
 	}
 
-		var_dump($search);
 }else{
 	$select = $bdd->prepare('SELECT * FROM recipe');
 	if($select->execute()){
