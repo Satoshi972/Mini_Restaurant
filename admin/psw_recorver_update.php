@@ -18,7 +18,7 @@ if(isset($_GET['token']) && !empty($_GET['token']))
 			$post = array_map('trim',array_map('strip_tags', $_POST));
 
 			if(strlen($post['password'])<8){
-				$error = 'Le mot de passe doit fait minimum 8 charactères';
+				$error = 'Le mot de passe doit contenir au minimum 8 caractères';
 			}
 
 			if(!isset($error)){
@@ -60,7 +60,7 @@ else
 <html lang="fr">
 <head>
 	<meta charset="UTF-8">
-	<title>Récuperation de mot de passe</title>
+	<title>Récupération du mot de passe</title>
 	<!-- contien mes entetes de page -->   
 	<?php require_once '../inc/head.php'; ?>
 </head>
@@ -74,7 +74,7 @@ else
 				if($displayForm):
 			?>
 			<form method="post" class="formhorizontal">
-				<legend>Récupération de mot de passe</legend>
+				<legend>Récupération du mot de passe</legend>
 
 				<?php 	
 					if(isset($error))
@@ -84,7 +84,7 @@ else
 				 ?>
 
 				<div class="form-group">
-					<label for="password">Rentrez votre nouveau mot de passe</label>
+					<label for="password">Entrez votre nouveau mot de passe</label>
 					<input type="password" class="form-control" name="password" id="password" placeholder="*******" required>
 				</div>
 

@@ -69,7 +69,7 @@ if(isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id']))
 
 						<?php if(!isset($my_user_recipe) || empty($my_user_recipe)): ?>
 
-						<p class="alert alert-danger" role="alert"><strong>Désolé</strong>, aucun editeur correspondant</p>
+						<p class="alert alert-danger" role="alert"><strong>Désolé</strong>, aucun éditeur correspondant</p>
 
 						<?php elseif(isset($success)): ?>
 						<?php echo $success; ?>
@@ -83,7 +83,7 @@ if(isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id']))
 
 							<!-- history.back() permet de revenir à la page précédente -->
 							<button type="button" class="btn btn-default btn-sm" onclick="javascript:history.back();">Annuler</button>
-							<button class="btn btn-default btn-sm" type="submit" value="Supprimer cette recette">Supprimer cet editeur  <span class="glyphicon glyphicon-remove"></span></button>
+							<button class="btn btn-default btn-sm" type="submit" value="Supprimer cette recette">Supprimer cet éditeur  <span class="glyphicon glyphicon-remove"></span></button>
 						</form>
 						<p class="list"><pre><?=$my_user_recipe['rcp_title'].'<br><br> '.$my_user_recipe['rcp_content'];?></pre></p>
 					<?php endif; ?>

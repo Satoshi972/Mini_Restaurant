@@ -88,7 +88,7 @@ if(!empty($_POST)){
 
 		if($update->execute())
 		{
-			$success = 'Félicitations votre recette a été modifiée';
+			$success = 'Félicitations, votre recette a bien été modifiée';
 
 		} else {
 			var_dump($update->errorInfo());
@@ -162,7 +162,7 @@ if(!empty($_POST)){
 						</div>
 						</form>
 					<?php else: ?>
-					<p class="alert alert-danger" role="alert">Désolé, aucune recette correspondante !!!</p>
+					<p class="alert alert-danger" role="alert">Désolé, aucune recette correspondante trouvée !!!</p>
 					<?php endif; ?>
 					</div>
 			</div>

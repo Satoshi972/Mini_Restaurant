@@ -28,12 +28,12 @@ if(!empty($_POST))
 
 	if(strlen($post['firstname']) < 3)
 	{
-		$error[] = 'Le prénom doit faire au moins 3 caractères';
+		$error[] = 'Le prénom doit contenir au moins 3 caractères';
 	}
 
 	if(strlen($post['lastname']) < 3)
 	{
-		$error[] = 'Le nom doit faire au moins 3 caractères';
+		$error[] = 'Le nom doit contenir au moins 3 caractères';
 	}
 
 	if(!filter_var($post['email'], FILTER_VALIDATE_EMAIL))
@@ -43,12 +43,12 @@ if(!empty($_POST))
 
 	if(strlen($post['password']) < 8 || strlen($post['password']) > 20)
 	{
-		$error[] = 'Le mot de passe doit comporter entre 8 et 20 caractères maximum';
+		$error[] = 'Le mot de passe doit contenir entre 8 et 20 caractères';
 	}
 
 	if(!is_numeric($post['role']))
 	{
-		$error[] = 'Erreur lors du choix du role';
+		$error[] = 'Erreur lors du choix du rôle';
 	}
 
 	if(count($error) > 0)
@@ -126,7 +126,7 @@ if(!empty($_POST))
 			</div>
 
 			<div class="form-group">
-				<label for="role">Role</label>
+				<label for="role">Rôle</label>
 				<select class="selectpicker" id="role" name="role"  required>
 					<?php foreach ($role as $key => $value): ?>
 						<option value="<?php echo $value['rol_id'] ?>"><?php echo $value['rol_name'] ?></option>

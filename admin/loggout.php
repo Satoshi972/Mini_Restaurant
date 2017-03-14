@@ -33,7 +33,7 @@ if(isset($_GET['loggout']) && ($_GET['loggout'] == 'yes'))
 
 			if(isset($_SESSION['nom']) && isset($_SESSION['prenom']) && isset($_SESSION['email'])): ?>
 					<p style="text-align:center;">
-						<?php echo $_SESSION['prenom']; ?>, veux-tu te déconnecter ? Vraiment ?
+						<?php echo $_SESSION['prenom']; ?>, voulez-vous vous déconnecter ? Vraiment ?
 
 						<br><br>
 						<img src="http://ronron.e-monsite.com/medias/images/chaton-triste.jpg" style="height:200px;border-radius:10px;">
@@ -44,8 +44,8 @@ if(isset($_GET['loggout']) && ($_GET['loggout'] == 'yes'))
 					</p>
 
 				<?php else: ?>
-					<p style="text-align:center;">
-						Tu es déjà déconnecté, tu n'existes pas !!
+					<p classst="text-center text-info">
+						Vous êtes déjà déconnecté !!
 
 						<br><br>
 						<img src="http://captainquizz.s3.amazonaws.com/quizz/551aeb19366880.99678770.jpg" style="height:200px;border-radius:10px;">

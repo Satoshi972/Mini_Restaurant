@@ -117,7 +117,7 @@ if(!empty($_POST))
 					
 					<input type="submit" value="Se connecter" class="btn btn-default">
 				
-					<a href="psw_recorver.php" class="btn btn-info">Mot de passe oublier</a>
+					<a href="psw_recorver.php" class="btn btn-info">Mot de passe oublié</a>
 				
 				</div>
 				

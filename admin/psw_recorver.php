@@ -46,12 +46,12 @@ if(!empty($_POST))
 							$siteAdd = $_SERVER['SERVER_NAME'];
 
 							// $data = "<a href='psw_recorver_update?token=.$token.'>Votre lien de récupération</a>";
-							$data = "<a href='http://localhost/WF3_PERDAF/GitubProject/Projet WF3/Mini_Restaurant/admin/psw_recorver_update.php?token=$token'>Changer votre mot de passe</a>";
+							$data = "<a href='http://localhost/WF3_PERDAF/GitubProject/Projet WF3/Mini_Restaurant/admin/psw_recorver_update.php?token=$token'>Changez votre mot de passe</a>";
 
 
-							mail($post['email'],'Réinitialisation de mot de passe', $data, $headers);
+							mail($post['email'],'Réinitialisation du mot de passe', $data, $headers);
 
-							$success = 'Un lien de reinitialisation vous a été envoyer, verifier vous boite mail !<br> Vous pouvez fermer cette page !';
+							$success = 'Un lien de réinitialisation vous a été envoyé, verifiez votre boîte mail !<br> Vous pouvez fermer cette page !';
 							
 					}else
 					{
@@ -70,7 +70,7 @@ if(!empty($_POST))
 <html lang="fr">
 <head>
 	<meta charset="UTF-8">
-	<title>Récuperation de mot de passe</title>
+	<title>Récuperation du mot de passe</title>
 
 	<?php include '../inc/head.php'; ?>
 
@@ -84,7 +84,7 @@ if(!empty($_POST))
 		<div class="jumbotron">
 			<?php if(!isset($success)): ?>
 			<form method="post" class="formhorizontal">
-				<legend>Récupération de mot de passe</legend>
+				<legend>Récupération du mot de passe</legend>
 
 				<?php 	
 					if(isset($error))
@@ -94,7 +94,7 @@ if(!empty($_POST))
 				 ?>
 
 				<div class="form-group">
-					<label for="email">Rentrez votre email</label>
+					<label for="email">Entrez votre adresse email</label>
 					<input type="mail" class="form-control" name="email" id="email" placeholder="email@mail.mail" required>
 				</div>
 
