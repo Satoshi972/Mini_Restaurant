@@ -42,7 +42,7 @@ if(!empty($_POST)){
 					mkdir($uploadDir, 0755); //pour la compatibilité
 				} 
 				// on renomme le fichier
-				$newPictureName = uniqid('image_').'.'.$extension;
+				$newPictureName = uniqid('img_').'.'.$extension;
 
 				if(!move_uploaded_file($_FILES['picture']['tmp_name'], $uploadDir.$newPictureName)){
 					$errors[] = 'Erreur lors de l\'upload du fichier';

@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once 'inc/connect.php';
 
 //- Definitions des variables
@@ -11,18 +10,18 @@ if(!empty($_POST)) { // si le tableau n'est pas vide alors on fait une boucle qu
 	foreach($_POST as $key => $value){ //
 		$user[$key] = trim(strip_tags($value));// sert a retirer les balises html ou php.  
 	}
-	if(empty($user["last_name"]) || strlen($user["last_name"]) < 3) {
-		$errors[] = "<p>Votre nom doit être complété</p><br>";
+	if(!preg_match('#^[A-z0-9._-]{3,}$#',$user["last_name"])) {
+		$errors[] = "Votre nom doit être complété";
 	}
 
-	if(empty($user["first_name"]) || strlen($user["first_name"]) < 3) {
-		$errors[] = "<p>Votre prénom doit être complété</p><br>";
+	if(!preg_match('#^[A-z0-9._-]{3,}$#',$user["first_name"])) {
+		$errors[] = "Votre prénom doit être complété";
 	}
-	if(!filter_var($user["email"], FILTER_VALIDATE_EMAIL)) {
+	if(!preg_match('#^[a-z0-9._-]{8,20}$#', $post['password']))) {
 		$errors[] = "<p>Votre EMAIL est invalide !!!</p><br>";         
 	}
-	if(empty($user["comment"]) || strlen($user["comment"]) < 2) {
-		$errors[] = "<p>Votre message doit être complété</p><br>";
+	if(!preg_match('#^[a-z0-9._-]{10,}$#',$user["comment"])) {
+		$errors[] = "Votre message doit être complété";
 	}
 
 	if(count($errors) === 0) {

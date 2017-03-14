@@ -68,7 +68,7 @@ else
 			endforeach;
 		?>
 			<div class="text-center">
-				<a href="recipe_list.php">
+				<a href="list_recipes.php">
 					<button>Découvrir toutes les recettes des chefs</button>
 				</a>
 			</div>

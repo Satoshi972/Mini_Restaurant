@@ -25,7 +25,7 @@ else
 <body>
 	<?php require_once '../inc/menu_admin.php' ?>
 	<div>
-		<table>
+		<table class="table table-striped">
 			<thead>
 				<tr>
 					<th>Nom</th>
