@@ -49,11 +49,12 @@
 			<?php if($roleUser == 'editor'): ?>
 				<div class="navside">
 					<ul>
-						<div class="titreMenu">Gestion des recettes</div>
+						<!-- <div class="titreMenu">Gestion des recettes</div>
 						<li><a href="list_recipes.php">Liste des recettes</a></li>
 						<li><a href="modif_recipe.php">Modifer une recette</a></li>
-						<li><a href="delete_recipe.php">Supprimer une recette</a></li>
+						<li><a href="delete_recipe.php">Supprimer une recette</a></li> -->
 						<li><a href="add_recipe.php">Ajouter une recette</a></li>
+						<li><a href="../search.php">Retour au site</a></li>
 					</ul>	
 				</div>
 			<?php endif; ?>

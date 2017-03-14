@@ -47,8 +47,8 @@ if(isset($_GET['loggout']) && ($_GET['loggout'] == 'yes'))
 					<p classst="text-center text-info">
 						Vous êtes déjà déconnecté !!
 
-						<br><br>
-						<img src="http://captainquizz.s3.amazonaws.com/quizz/551aeb19366880.99678770.jpg" style="height:200px;border-radius:10px;">
+						<br><!-- <br>
+						<img src="http://captainquizz.s3.amazonaws.com/quizz/551aeb19366880.99678770.jpg" style="height:200px;border-radius:10px;"> -->
 					</p>
 			<?php 
 			endif; ?>

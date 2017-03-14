@@ -140,7 +140,7 @@ if(!empty($_POST)) { // si le tableau n'est pas vide alors on fait une boucle qu
 						<div class="alert alert-success" style="display: none" role="alert" id="success_message">Success <i class="glyphicon glyphicon-thumbs-up"></i> Merci de vous contacter, nous vous repondrons au plus vite !!!</div>
 
 						<!-- Button -->
-						<div class="form-group">
+						<div class="form-group text-center">
 							<label class="col-md-4 control-label"></label>
 							<div class="col-md-4">
 								<button type="submit" class="btn btn-warning" >Envoyer <span class="glyphicon glyphicon-send"></span></button>
