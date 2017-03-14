@@ -59,7 +59,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
 								</div>
 
 								<div class="col-xs-6">
-									<p class="list"><?='Tel :' .$restaurant["inf_number"]; ?></p>
+									<p class="list"><?='Tel :' .$restaurant["inf_phone"]; ?></p>
 								</div>
 
 							</div>
