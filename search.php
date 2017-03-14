@@ -1,28 +1,40 @@
 <?php
 session_start();
 
+/**
+*
+*
+*
+*
+*/
+function hightlight($pattern, $string){
+	return preg_replace( '/('.$pattern.')/i', '<span style="font-weight: bold; color: red;">$1</span>', $string); 
+}
+
 require_once './inc/connect.php';
 
 if(isset($_GET['search']) && !empty($_GET['search'])){
 
 	$search = strval($_GET['search']);
 
-
 	$select = $bdd->prepare('SELECT rcp_title, rcp_content, rcp_id FROM recipe WHERE rcp_title LIKE :search OR rcp_content LIKE :search');
 
 	if($select->execute(array(':search' => $search.'%'))){
 
-		$res = $select->fetchAll(PDO::FETCH_ASSOC);
-		var_dump($res);
-
+		$resSearch = $select->fetchAll(PDO::FETCH_ASSOC);
+		if(count($resSearch) == 0){
+			$error = 'Désolé aucune recette trouver !';
+		}
 	}else{
-
+		die(var_dump($select->errorInfo()));
 	}
 
+}else{
+	$select = $bdd->prepare('SELECT * FROM recipe');
+	if($select->execute()){
+		$allRecipe = $select->fetchAll(PDO::FETCH_ASSOC);
+	}
 }
-
-
-
 
 ?><!DOCTYPE html>
 <html lang="fr">
@@ -51,6 +63,48 @@ if(isset($_GET['search']) && !empty($_GET['search'])){
 					</div>
 				</div>
 		</form>
+		
+		<?php if(!isset($error)): ?>
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>titre</th>
+							<th>Déscription</th>
+							<th>En savoir +</th>
+						</tr>
+					</thead>
+					<tbody>
+			<?php if(isset($allRecipe)): 
+
+					foreach ($allRecipe as $key): ?>
+						<tr>
+							<td><?= $key['rcp_title'] ?></td>
+							<td><?= $key['rcp_content'] ?></td>
+							<td><a href="view_recipe.php?id=<?= $key['rcp_id'] ?>" class="btn btn-default">En savoir +</a></td>
+						</tr>
+					<?php endforeach; ?>
+					</tbody>
+				</table>
+			<?php endif; ?>
+			<?php if(isset($resSearch)): 
+
+					foreach ($resSearch as $key): ?>
+						<tr>
+							<td><?= hightlight($search, $key['rcp_title']); ?></td>
+							<td><?= hightlight($search, $key['rcp_content']); ?></td>
+							<td><a href="view_recipe.php?id=<?= $key['rcp_id'] ?>" class="btn btn-default">En savoir +</a></td>
+						</tr>
+					<?php endforeach; ?>
+					</tbody>
+				</table>
+			<?php endif; ?>
+
+		<?php else: ?>
+			<div class="alert alert-warning alert-dismissible text-center" role="alert">
+				<h3><?=$error?></h3>
+			</div>
+		<?php endif; ?>
+
 	</div>
 </body>
 </html>

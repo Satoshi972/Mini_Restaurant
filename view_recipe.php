@@ -11,7 +11,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
 	$idRecipe = (int) $_GET['id'];
 
 	// Jointure SQL permettant de récupérer la recette & le prénom & nom de l'utilisateur l'ayant publié
-	$selectOne = $bdd->prepare('SELECT usr_firstname, usr_lastname, rcp_title, rcp_content, rcp_picture FROM users INNER JOIN recipe ON users.usr_id = recipe.rcp_usr_id WHERE rcp_id = :id');
+	$selectOne = $bdd->prepare('SELECT usr_firstname, usr_lastname, rcp_title, rcp_content, rcp_picture FROM users RIGHT JOIN recipe ON users.usr_id = recipe.rcp_usr_id WHERE rcp_id = :id');
 	$selectOne->bindValue(':id', $idRecipe, PDO::PARAM_INT);
 
 	if($selectOne->execute()){
@@ -23,13 +23,6 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
 		die; // alias de exit(); => die('Hello world');
 	}
 }
-
-//////////////////////Moteur de recherche ////////////////////////////////////////////////////////////////////////////////////////
-$words = array ('de', 'du', 'des', 'le', 'la', 'les'); //Définition des pronoms à mettre en évidence 
-  $str = "L'édition de cette année du 20 au 27 mars partout en France traitera des dernières tendances en vogue, 
-          comme le phénomène des blogs ou encore l'internet mobile.";  //Texte à mettre en surbrillance
-  echo preg_replace( '/('.implode('|', $words).')/i', '<span style="font-weight: bold; color: red;">$1</span>', $str); 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ?><!DOCTYPE html>
 <html>
