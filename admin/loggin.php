@@ -5,6 +5,11 @@ session_start();
 // require_once 'inc/verif_session.php';
 require_once '../inc/connect.php';
 
+if(isset($_SESSION['is_logged']) && $_SESSION['is_logged'] == true){
+	header('location: add_recipe.php');
+}
+
+
 $err = array();
 $display = true;
 

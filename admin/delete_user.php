@@ -35,7 +35,7 @@ if(isset($_GET['id']) && !empty($_GET['id']) && is_numeric($_GET['id']))
 				$delR->execute();
 				$delU->execute();
 
-				$success = 'La recette a bien été supprimée';
+				$success = 'L\'utilisateur et sa(ses) recette(s) ont bien été supprimés';
 
 			}
 			catch (Exception $e)

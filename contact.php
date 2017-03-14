@@ -27,7 +27,7 @@ if(!empty($_POST)) { // si le tableau n'est pas vide alors on fait une boucle qu
 	if(!preg_match('#^[A-z0-9._-]{3,}$#',$user["first_name"])) {
 		$errors[] = "<p>Votre prénom doit être complété</p><br>";
 	}
-	if(!preg_match('#^[a-z0-9._-]{8,20}$#', $post['password'])){
+	if(!preg_match('#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#', $user['email'])){
 		$errors[] = "<p>Votre EMAIL est invalide !!!</p><br>";         
 	}
 	if(!preg_match('#^[a-z0-9._-]{10,}$#',$user["comment"])) {

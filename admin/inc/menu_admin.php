@@ -25,8 +25,8 @@
 					<ul>
 						<div class="titreMenu">Gestion des recettes</div>
 						<li><a href="list_recipes.php">Liste des recettes</a></li>
-						<li><a href="modif_recipe.php">Modifer une recette</a></li>
-						<li><a href="delete_recipe.php">Supprimer une recette</a></li>
+						<!-- <li><a href="modif_recipe.php">Modifer une recette</a></li>
+						<li><a href="delete_recipe.php">Supprimer une recette</a></li> -->
 						<li><a href="add_recipe.php">Ajouter une recette</a></li>
 					</ul>	
 				</div>

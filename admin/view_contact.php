@@ -52,14 +52,16 @@ if(!empty($_POST))
 <head>
 	<meta charset="UTF-8">
 	<title>Liste des fiches de contact</title>
-	<?php require_once '../inc/head.php' ?>
+	<?php include '../inc/head.php'; ?>
+
+	<link rel="stylesheet" type="text/css" href="assets/css/styleAdmin.css">
 </head>
 <body>
 	<?php require_once 'inc/menu_admin.php' ?>
 	<div class="container">
 		
 
-		<div class="jumbotron">
+		<div class="jumbotron text-center">
 			<?php 
 				if($displayForm){
 			?>
@@ -74,16 +76,19 @@ if(!empty($_POST))
 			</div>	
 			<div class="list-group-item">
 				<h4 class="list-group-item-heading">Contenu</h4>
-				<p class="list-group-item-text"><?php echo json_decode($contacts['cts_content']);?></p>
-			</div>	
-			<div class="list-group-item">
-				<h4 class="list-group-item-heading">#</h4>
+				<p class="list-group-item-text"><?php 
 
-				<p class="list-group-item-text"><?php echo $contacts['cts_id']; ?></p>
-			</div>	
+				$infoContact = json_decode($contacts['cts_content'], true);
+					
+					echo '<p>Prenom :'.($infoContact['first_name']).'</p>';
+					echo '<p>Nom :'.($infoContact['last_name']).'</p>';
+					echo '<p>Email :'.($infoContact['email']).'</p>';
+					echo '<p>Message :'.($infoContact['comment']).'</p>';
 
+				?></p>
+			</div>	
 			<form method="post">
-				Statut :<input type="checkbox" value="1" name="statut">	<br>
+				Marquer comme lu :<input type="checkbox" value="1" name="statut">	<br>
 				<input type="submit" class="btn btn-primary" value="Modifier le statut">
 			</form>
 			<?php 
